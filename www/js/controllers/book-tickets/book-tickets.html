@@ -1,0 +1,15 @@
+<ion-view view-title="Book Tickets">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="vendor in vendors" type="item-text-wrap" href="#/tab/bookTicket/{{vendor._id}}">
+        <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
+        <h2>{{vendor.companyName}}</h2>
+        <p>{{vendor.type}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-option-button class="button-assertive" ng-click="remove(vendor)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
