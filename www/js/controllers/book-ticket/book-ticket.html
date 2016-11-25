@@ -1,43 +1,43 @@
 <ion-view view-title="{{vendor.companyName}}">
   <ion-content>
     <div class="list">
-      <div class="list">
+      <label class="item item-input item-select">
+        <span class="input-label">
+          Show
+        </span>
+        <select>
+          <option>Blue</option>
+          <option selected>Green</option>
+          <option>Red</option>
+        </select>
+      </label>
 
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Show
-          </div>
-          <select>
-            <option>Blue</option>
-            <option selected>Green</option>
-            <option>Red</option>
-          </select>
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label">Number of Tickets</span>
-          <input type="number" value="2">
-        </label>
+      <label class="item item-input">
+        <span class="input-label">Number of Tickets</span>
+        <input type="number" value="2">
+      </label>
 
 
-        <label class="item item-input" ng-click="openDatePicker()">
-          <span class="input-label">Date</span>
-          <input type="text" ng-model="date" readonly>
-          <!--<div>{{date}}</div>-->
-        </label>
+      <label class="item item-input" ng-click="openDatePicker()">
+        <span class="input-label">Date</span>
+        <input class="util-pl" type="text" ng-model="date" readonly>
+        <!--<div>{{date}}</div>-->
+      </label>
 
-        <label class="item item-input item-select" ng-if="date">
+      <label class="item item-input item-select" ng-if="date">
                   <span class="input-label">
                       Show Time
                   </span>
-          <select>
-            <option>9:20</option>
-            <option selected>10:50</option>
-            <option>6:30</option>
-          </select>
-        </label>
+        <select>
+          <option>9:20</option>
+          <option selected>10:50</option>
+          <option>6:30</option>
+        </select>
+      </label>
 
-      </div>
     </div>
+    <button class="button button-full button-positive">
+      Book
+    </button>
   </ion-content>
 </ion-view>

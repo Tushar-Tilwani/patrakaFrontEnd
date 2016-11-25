@@ -686,7 +686,7 @@ angular.module('starter.services')
         "id": "da642713f10d9b817bce7fa7739a9194059d32ae",
         "image": "da642713f10d9b817bce7fa7739a9194059d32ae.jpg"
       }
-    ]
+    ];
     return {
       all: function () {
         return VENDORS;
