@@ -5,22 +5,42 @@
         <span class="input-label">
           Show
         </span>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
+        <select
+          ng-init="selected.show = vendor.spots[0]"
+          ng-model="selected.show"
+          ng-change="showUpdated()"
+          ng-options="show as show.name for show in vendor.spots">
+          <!--<option ng-repeat="s in vendor.spots">{{s.name}}</option>-->
         </select>
       </label>
 
-      <label class="item item-input">
-        <span class="input-label">Number of Tickets</span>
-        <input type="number" value="2">
+      <!--&lt;!&ndash;<label class="item item-input">&ndash;&gt;-->
+      <!--&lt;!&ndash;<span class="input-label">Number of Tickets</span>&ndash;&gt;-->
+      <!--&lt;!&ndash;<input type="number" value="2">&ndash;&gt;-->
+      <!--&lt;!&ndash;<br/>&ndash;&gt;-->
+      <!--&lt;!&ndash;</label>&ndash;&gt;-->
+
+      <!--<label class="item item-input item-floating-label">-->
+      <!--<span class="input-label"><i>Tickets Available:</i>{{ticketsAvailable-ticketCount}}</span>-->
+      <!--<input type="number" placeholder="Number of Tickets" ng-model="ticketCount">-->
+      <!--</label>-->
+
+      <label class="item item-input item-select">
+                  <span class="input-label">
+                      Number Of tickets
+                  </span>
+        <select
+          ng-init=""
+          ng-model="ticketCount"
+          ng-change="showUpdatedTicketCount()"
+          ng-options="tc as tc for tc in tcArray">
+        </select>
       </label>
 
 
       <label class="item item-input" ng-click="openDatePicker()">
         <span class="input-label">Date</span>
-        <input class="util-pl" type="text" ng-model="date" readonly>
+        <input class="padding-left align-right" type="text" ng-model="date" readonly>
         <!--<div>{{date}}</div>-->
       </label>
 
@@ -29,9 +49,7 @@
                       Show Time
                   </span>
         <select>
-          <option>9:20</option>
-          <option selected>10:50</option>
-          <option>6:30</option>
+          <option ng-repeat="t in selected.show.times">{{t}}</option>
         </select>
       </label>
 

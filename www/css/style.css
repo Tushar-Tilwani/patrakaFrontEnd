@@ -3,6 +3,6 @@ input.util-pl {
   padding-left: 10px;
 }
 
-.btm {
-
+input.align-right {
+  text-align: right;
 }
