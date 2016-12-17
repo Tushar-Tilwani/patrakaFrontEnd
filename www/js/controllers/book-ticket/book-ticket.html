@@ -1,5 +1,15 @@
 <ion-view view-title="{{vendor.companyName}}">
   <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap">
+        Status:
+        <soan ng-class="{green : !isHouseFull, yellow : isHouseFull}">
+          {{ticketsAvailable}} Ticket<span ng-if="ticketsAvailable > 1">s</span> Available
+        </soan>
+
+      </div>
+    </div>
+
     <div class="list">
       <label class="item item-input item-select">
         <span class="input-label">
@@ -14,26 +24,15 @@
         </select>
       </label>
 
-      <!--&lt;!&ndash;<label class="item item-input">&ndash;&gt;-->
-      <!--&lt;!&ndash;<span class="input-label">Number of Tickets</span>&ndash;&gt;-->
-      <!--&lt;!&ndash;<input type="number" value="2">&ndash;&gt;-->
-      <!--&lt;!&ndash;<br/>&ndash;&gt;-->
-      <!--&lt;!&ndash;</label>&ndash;&gt;-->
-
-      <!--<label class="item item-input item-floating-label">-->
-      <!--<span class="input-label"><i>Tickets Available:</i>{{ticketsAvailable-ticketCount}}</span>-->
-      <!--<input type="number" placeholder="Number of Tickets" ng-model="ticketCount">-->
-      <!--</label>-->
 
       <label class="item item-input item-select">
                   <span class="input-label">
                       Number Of tickets
                   </span>
-        <select
-          ng-init=""
-          ng-model="ticketCount"
-          ng-change="showUpdatedTicketCount()"
-          ng-options="tc as tc for tc in tcArray">
+        <select ng-model="ticketCount"
+                ng-change="showUpdatedTicketCount()"
+                ng-options="tc as tc for tc in tcArray"
+                ng-disabled="isHouseFull">
         </select>
       </label>
 

@@ -34,7 +34,7 @@ angular.module('starter.controllers')
       ionicDatePicker.openDatePicker(ipObj1);
     };
 
-    $scope.ticketsAvailable = 7;
+    $scope.ticketsAvailable = 3;
     $scope.ticketCount = _.min([2, $scope.ticketsAvailable]);
     var maxTicketCount = _.min([10, $scope.ticketsAvailable]);
     $scope.tcArray = _.times(maxTicketCount, function (i) {

@@ -6,3 +6,11 @@ input.util-pl {
 input.align-right {
   text-align: right;
 }
+
+.green {
+  color: #006400;
+}
+
+.yellow {
+  color: orangered;
+}
