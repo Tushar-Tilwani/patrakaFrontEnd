@@ -127,4 +127,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       disableWeekdays: []
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
+  })
+  .run(function ($rootScope) {
+    $rootScope.user = {
+      //type: 'business',
+       type: 'personal'
+    }
   });
