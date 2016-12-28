@@ -94,6 +94,15 @@ angular.module('starter.services')
       getByLocation: function (location) {
         return $http.get(PROPERTIES.DOMAIN + 'vendors');
       },
+      getById: function (vendorId) {
+        return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId);
+      },
+      getShowsById: function (vendorId) {
+        return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/shows');
+      },
+      getShowsByPattern: function (pattern) {
+        return $http.get(PROPERTIES.DOMAIN + 'shows/filter/' + pattern);
+      },
       remove: function (vendor) {
         VENDORS.splice(VENDORS.indexOf(vendor), 1);
       },

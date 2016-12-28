@@ -9,7 +9,7 @@ angular.module('starter.controllers', []);
 angular.module('starter.services', []);
 angular.module('starter.globals', []);
 
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'btford.socket-io'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/home',
         views: {
           'tab-home': {
-            templateUrl: 'js/controllers/home/home.html',
+            templateUrl: 'js/controllers/user/home/home.html',
             controller: 'HomeCtrl'
           }
         }
@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/bookTickets',
         views: {
           'tab-book-tickets': {
-            templateUrl: 'js/controllers/book-tickets/book-tickets.html',
+            templateUrl: 'js/controllers/user/book-tickets/book-tickets.html',
             controller: 'BookTicketsCtrl'
           }
         }
@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/bookTicket/:vendorId',
         views: {
           'tab-book-tickets': {
-            templateUrl: 'js/controllers/book-ticket/book-ticket.html',
+            templateUrl: 'js/controllers/user/book-ticket/book-ticket.html',
             controller: 'BookTicketCtrl'
           }
         }
@@ -78,7 +78,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/useTickets',
         views: {
           'tab-use-tickets': {
-            templateUrl: 'js/controllers/use-tickets/use-tickets.html',
+            templateUrl: 'js/controllers/user/use-tickets/use-tickets.html',
             controller: 'UseTicketsCtrl'
           }
         }
@@ -88,7 +88,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/useTicket/:ticketId',
         views: {
           'tab-use-tickets': {
-            templateUrl: 'js/controllers/use-ticket/use-ticket.html',
+            templateUrl: 'js/controllers/user/use-ticket/use-ticket.html',
             controller: 'UseTicketCtrl'
           }
         }
@@ -98,8 +98,27 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/aboutUs',
         views: {
           'tab-about-us': {
-            templateUrl: 'js/controllers/about-us/about-us.html',
+            templateUrl: 'js/controllers/user/about-us/about-us.html',
             controller: 'AboutUsCtrl'
+          }
+        }
+      })
+
+      .state('tab.makeShows', {
+        url: '/makeShows',
+        views: {
+          'tab-make-shows': {
+            templateUrl: 'js/controllers/vendor/make-shows/make-shows.html',
+            controller: 'MakeShowsCtrl'
+          }
+        }
+      })
+      .state('tab.makeShow', {
+        url: '/makeShows/:showId',
+        views: {
+          'tab-make-shows': {
+            templateUrl: 'js/controllers/vendor/make-shows/make-show.html',
+            controller: 'MakeShowCtrl'
           }
         }
       });
@@ -130,7 +149,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   })
   .run(function ($rootScope) {
     $rootScope.user = {
-      //type: 'business',
-       type: 'personal'
+      type: 'business',
+      //type: 'personal'
     }
   });

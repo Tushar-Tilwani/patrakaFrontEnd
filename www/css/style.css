@@ -14,3 +14,12 @@ input.align-right {
 .yellow {
   color: orangered;
 }
+
+.bar .button-clear {
+  color: #555;
+}
+
+.search-results {
+  position: absolute;
+  z-index: 100;
+}
