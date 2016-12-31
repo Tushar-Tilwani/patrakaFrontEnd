@@ -87,6 +87,7 @@ angular.module('starter.services')
         "id": "cc325d25affc2aaa38fae5499f6b29fb22005e17"
       }
     ];
+    var VENDOR_SHOWS;
     return {
       all: function () {
         return VENDORS;
@@ -102,6 +103,15 @@ angular.module('starter.services')
       },
       getShowsByPattern: function (pattern) {
         return $http.get(PROPERTIES.DOMAIN + 'shows/filter/' + pattern);
+      },
+      putShowForVendor: function (vendorId, showId) {
+        return $http.put(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
+      },
+      deleteShowFromVendor: function (vendorId, showId) {
+        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
+      },
+      createShowFromVendor: function (vendorId, showId) {
+        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
       },
       remove: function (vendor) {
         VENDORS.splice(VENDORS.indexOf(vendor), 1);

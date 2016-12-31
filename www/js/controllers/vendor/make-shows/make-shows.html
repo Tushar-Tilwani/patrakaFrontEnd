@@ -6,26 +6,24 @@
       <input type="search" placeholder="Search" ng-change="searchShowsByPattern(addShowTypeAhead.searchStr)"
              ng-model="addShowTypeAhead.searchStr">
     </label>
-    <button class="button button-clear">
+    <button  ng-click="add()" class="button button-clear">
       Add
     </button>
   </ion-header-bar>
 
-  <ion-content class="search-results">
+  <ion-content ng-show="addShowTypeAhead.results.length > 0" class="search-results" scroll="false">
     <div class="list ">
       <a ng-repeat="s in addShowTypeAhead.results" ng-click="searchItemClick(s)" href="#" class="item">{{s.fields.title}}</a>
     </div>
   </ion-content>
 
   <ion-content class="padding">
-
     <div class="list">
-      <a ng-repeat="s in shows" class="item item-thumbnail-left" href="#">
+      <a ng-repeat="s in shows" class="item item-thumbnail-left" href="#/tab/makeShows/{{s._id}}">
         <img src="{{s.fields.image_url}}">
         <h2>{{s.fields.title}}</h2>
         <p>{{_.join(s.fields.directors)}}</p>
       </a>
-
     </div>
   </ion-content>
 </ion-view>

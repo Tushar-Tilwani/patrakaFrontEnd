@@ -9,7 +9,7 @@ angular.module('starter.controllers', []);
 angular.module('starter.services', []);
 angular.module('starter.globals', []);
 
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'btford.socket-io'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'ionic-timepicker', 'btford.socket-io'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -117,7 +117,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/makeShows/:showId',
         views: {
           'tab-make-shows': {
-            templateUrl: 'js/controllers/vendor/make-shows/make-show.html',
+            templateUrl: 'js/controllers/vendor/make-show/make-show.html',
             controller: 'MakeShowCtrl'
           }
         }

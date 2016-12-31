@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "ionic-datepicker": "^1.2.1",
-    "socket.io-client": "^1.7.2"
+    "socket.io-client": "^1.7.2",
+    "ionic-timepicker": "^0.6.0"
   }
 }

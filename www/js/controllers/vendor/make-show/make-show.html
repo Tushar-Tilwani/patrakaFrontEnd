@@ -1,0 +1,65 @@
+<ion-view view-title="Show">
+  <ion-content class="padding">
+
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Tickets Avialable:</span>
+        <input type="number">
+      </label>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Show Timings:
+      </div>
+      <div class="item item-text-wrap row responsive">
+        <div ng-repeat="time in times track by $index" class="col col-50 border-stuff">
+          {{time}}
+          <a ng-click="remove($index)" class="button button-clear button-small icon ion-close-circled top-right"></a>
+        </div>
+      </div>
+      <div class="item item-divider">
+        <a class="button button-full button-positive" ng-click="openTimePicker()">
+          Add Show
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Start Date:
+      </div>
+      <div class="item item-text-wrap">
+        <div class="border-stuff">
+          {{startDate}}
+        </div>
+      </div>
+      <div class="item item-divider">
+        <a class="button button-full button-positive" ng-click="startDatePicker()">
+          Set Date
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        End Date:
+      </div>
+      <div class="item item-text-wrap row">
+        <div class="border-stuff">
+          {{endDate}}
+        </div>
+      </div>
+      <div class="item item-divider">
+        <a class="button button-full button-positive" ng-click="endDatePicker()">
+          Set Date
+        </a>
+      </div>
+    </div>
+
+    <button class="button button-block button-balanced">
+      Create
+    </button>
+
+  </ion-content>
+</ion-view>
