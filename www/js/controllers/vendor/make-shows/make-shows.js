@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('MakeShowsCtrl', function ($scope, Vendors) {
+  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $ionicNavBarDelegate) {
     $scope._ = _;
     $scope.addShowTypeAhead = {};
 
@@ -30,7 +30,7 @@ angular.module('starter.controllers')
 
     $scope.add = function () {
       var showId = _.get($scope.addShowTypeAhead.selected, '_id');
-      Vendors.putShowForVendor('5853a2983dc77b661dbf364f', showId)
+      Vendors.putShowForVendor($rootScope.vendorId, showId)
         .then(function (response) {
           console.log(response);
           _init();
