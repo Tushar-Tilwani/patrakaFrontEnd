@@ -44,7 +44,9 @@ angular.module('starter.controllers')
 
 
     $scope.selected = {
-      show: null
+      show: {
+        times:['10:20 am','02:20 pm','10:20 pm']
+      }
     };
 
     $scope.updatedShow = function () {

@@ -64,8 +64,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.getVendors', {
-        url: '/getVendors/:showId',
+      .state('tab.getVendorsByShow', {
+        url: '/getVendorsByShow/:showId',
         views: {
           'tab-book-tickets': {
             templateUrl: 'js/controllers/user/get-vendors/get-vendors.html',

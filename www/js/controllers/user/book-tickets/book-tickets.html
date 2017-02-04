@@ -27,7 +27,7 @@
 
   <ion-content>
     <div class="row">
-      <a ng-repeat="s in shows" class="col col-50 sh">
+      <a ng-repeat="s in shows" class="col col-50 sh" href="#/tab/getVendorsByShow/{{s._id}}">
         <img src="{{s.fields.image_url}}" alt="{{s.fields.title}}" class="fit"/>
       </a>
     </div>
