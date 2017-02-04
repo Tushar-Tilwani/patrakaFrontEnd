@@ -64,8 +64,18 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
+      .state('tab.getVendors', {
+        url: '/getVendors/:showId',
+        views: {
+          'tab-book-tickets': {
+            templateUrl: 'js/controllers/user/get-vendors/get-vendors.html',
+            controller: 'GetVendorsCtrl'
+          }
+        }
+      })
+
       .state('tab.bookTicket', {
-        url: '/bookTicket/:vendorId',
+        url: '/bookTicket/:showId/:vendorId',
         views: {
           'tab-book-tickets': {
             templateUrl: 'js/controllers/user/book-ticket/book-ticket.html',
@@ -151,7 +161,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   .run(function ($rootScope) {
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
-      type: 'business',
-      //type: 'personal'
+      //type: 'business',
+      type: 'personal'
     }
   });

@@ -3,46 +3,49 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
-<div ng-if="user.type=='personal'">
-  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+<div class="tabs-striped tabs-top tabs-background-dark tabs-color-light">
 
-    <!-- Home Tab -->
-    <ion-tab title="Home" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/home">
-      <ion-nav-view name="tab-home"></ion-nav-view>
-    </ion-tab>
+  <div ng-if="user.type=='personal'">
+    <ion-tabs class="tabs-icon-top">
 
-    <!-- Use Tickets Tab -->
-    <ion-tab title="Use Tickets" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes"
-             href="#/tab/useTickets">
-      <ion-nav-view name="tab-use-tickets"></ion-nav-view>
-    </ion-tab>
+      <!-- Home Tab -->
+      <ion-tab title="Home" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/home">
+        <ion-nav-view name="tab-home"></ion-nav-view>
+      </ion-tab>
 
-    <!-- Book Tickets Tab -->
-    <ion-tab title="Book Tickets" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes"
-             href="#/tab/bookTickets">
-      <ion-nav-view name="tab-book-tickets"></ion-nav-view>
-    </ion-tab>
+      <!-- Use Tickets Tab -->
+      <ion-tab title="Use Tickets" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes"
+               href="#/tab/useTickets">
+        <ion-nav-view name="tab-use-tickets"></ion-nav-view>
+      </ion-tab>
 
-    <!-- About Us Tab -->
-    <ion-tab title="About Us" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/aboutUs">
-      <ion-nav-view name="tab-about-us"></ion-nav-view>
-    </ion-tab>
+      <!-- Book Tickets Tab -->
+      <ion-tab title="Book Tickets" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes"
+               href="#/tab/bookTickets">
+        <ion-nav-view name="tab-book-tickets"></ion-nav-view>
+      </ion-tab>
 
-  </ion-tabs>
-</div>
+      <!-- About Us Tab -->
+      <ion-tab title="About Us" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/aboutUs">
+        <ion-nav-view name="tab-about-us"></ion-nav-view>
+      </ion-tab>
 
-<div ng-if="user.type=='business'">
-  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    </ion-tabs>
+  </div>
 
-    <!-- Home Tab -->
-    <ion-tab title="Shows" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/makeShows">
-      <ion-nav-view name="tab-make-shows"></ion-nav-view>
-    </ion-tab>
+  <div ng-if="user.type=='business'">
+    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-    <!-- About Us Tab -->
-    <ion-tab title="About Us" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/aboutUs">
-      <ion-nav-view name="tab-about-us"></ion-nav-view>
-    </ion-tab>
+      <!-- Home Tab -->
+      <ion-tab title="Shows" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/makeShows">
+        <ion-nav-view name="tab-make-shows"></ion-nav-view>
+      </ion-tab>
 
-  </ion-tabs>
+      <!-- About Us Tab -->
+      <ion-tab title="About Us" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/aboutUs">
+        <ion-nav-view name="tab-about-us"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+  </div>
 </div>

@@ -1,16 +1,37 @@
+<!--<ion-view view-title="Book Tickets">-->
+    <!--<ion-content>-->
+        <!--<ion-list>-->
+            <!--<ion-item ng-repeat="vendor in vendors" type="item-text-wrap" href="#/tab/bookTicket/{{vendor._id}}"-->
+                      <!--class="item-remove-animate item-avatar item-icon-right">-->
+                <!--<img ng-src="http://localhost:3000/static/images/{{vendor.image}}">-->
+                <!--<h2>{{vendor.companyName}}</h2>-->
+                <!--<p>{{vendor.type}}</p>-->
+                <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+                <!--<ion-option-button class="button-assertive" ng-click="remove(vendor)">-->
+                    <!--Delete-->
+                <!--</ion-option-button>-->
+            <!--</ion-item>-->
+        <!--</ion-list>-->
+    <!--</ion-content>-->
+<!--</ion-view>-->
 <ion-view view-title="Book Tickets">
-    <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="vendor in vendors" type="item-text-wrap" href="#/tab/bookTicket/{{vendor._id}}"
-                      class="item-remove-animate item-avatar item-icon-right">
-                <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
-                <h2>{{vendor.companyName}}</h2>
-                <p>{{vendor.type}}</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
-                <ion-option-button class="button-assertive" ng-click="remove(vendor)">
-                    Delete
-                </ion-option-button>
-            </ion-item>
-        </ion-list>
-    </ion-content>
+  <ion-header-bar class="bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="pattern" ng-change="populate(pattern)">
+    </label>
+    <button class="button button-clear">
+      Cancel
+    </button>
+  </ion-header-bar>
+
+  <ion-content class="padding">
+    <div class="list">
+      <a ng-repeat="s in shows" class="item item-thumbnail-left" href="#/tab/getVendors/{{s._id}}">
+        <img src="{{s.fields.image_url}}">
+        <h2>{{s.fields.title}}</h2>
+        <p>{{_.join(s.fields.directors)}}</p>
+      </a>
+    </div>
+  </ion-content>
 </ion-view>

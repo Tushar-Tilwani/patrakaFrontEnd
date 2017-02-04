@@ -7,6 +7,14 @@ input.align-right {
   text-align: right;
 }
 
+.center {
+  text-align: center;
+}
+
+.size-50 {
+  font-size: 75%;
+}
+
 .green {
   color: #006400;
 }
@@ -15,9 +23,10 @@ input.align-right {
   color: orangered;
 }
 
-.button-clear {
-  color: #555 !important;
+.white {
+  color: whitesmoke;
 }
+
 
 .search-results {
   position: absolute;
@@ -27,8 +36,9 @@ input.align-right {
 .row {
   flex-wrap: wrap;
 }
+
 .col {
-  box-sizing:border-box;
+  box-sizing: border-box;
   margin-top: 0.25em;
 }
 
@@ -38,7 +48,7 @@ input.align-right {
   right: 0;
 }
 
- .border-stuff {
+.border-stuff {
   background-color: #fff;
   box-shadow: none;
   color: #387ef5;
@@ -58,5 +68,12 @@ input.align-right {
   font-size: 16px;
   line-height: 42px;
   cursor: pointer;
-   width: 100%;
+  width: 100%;
+}
+
+ion-view {
+  background: #7474BF; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #7474BF, #348AC7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #7474BF, #348AC7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
