@@ -1,29 +1,27 @@
 angular.module('starter.controllers')
-  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $cordovaGeolocation) {
+  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location) {
     $scope.ticket = Tickets.get($stateParams.ticketId);
-    $scope.t = '1a';
+    // $scope.ticket = {
+    //   companyName: ''
+    // }
 
-    $ionicPlatform.ready(function () {
-      $scope.hh = function () {
-        $cordovaGeolocation
-          .getCurrentPosition(posOptions)
-          .then(function (position) {
-            var ticketData = {
-              location: {}
-            };
-            ticketData.location.lat = $scope.lat = position.coords.latitude;
-            ticketData.location.lng = $scope.lon = position.coords.longitude;
-            $http.post('http://10.0.0.51:3000/location', ticketData)
-              .then(function (obj) {
-                $scope.lat += 'sss';
-                $scope.l = obj.data.distance + ' Meters';
-              }, function (err) {
-                $scope.l = 'err:' + err;
-              });
-          }, function (err) {
-            $scope.l = err;
-            // error
+    var popupData = {
+      title: '<i class="icon ion-checkmark-circled green"></i> Authentication Successful',
+      template: ''
+    };
+
+    $scope.useTicket = function () {
+      //$state.go('tab.useTicket');
+
+      $scope.isLoading = true;
+      $timeout(function () {
+        $scope.isLoading = false;
+        $ionicPopup.alert(popupData)
+          .then(function (res) {
+            $location.path('tab/useTickets');
           });
-      };
-    });
+      }, 1000);
+
+    };
+
   });

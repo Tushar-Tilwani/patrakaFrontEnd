@@ -1,11 +1,11 @@
 angular.module('starter.services')
   .factory('Tickets', ['$http', function ($http) {
     var TICKETS = [{
-      "_id": "",
+      "_id": "572bda4df843ec053c061bf5",
       "companyName": "George Eastman Museum",
       "company_id": "572bda4df843ec053c061bf5",
-      "show": "show",
-      "time": "10:30"
+      "showName": "The Hunger Games",
+      "time": "10:30 am"
     }];
 
     return {
@@ -21,7 +21,7 @@ angular.module('starter.services')
             return TICKETS[i];
           }
         }
-        return null;
+        return TICKETS[0];
       }
     };
   }]);

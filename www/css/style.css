@@ -86,6 +86,11 @@ img.fit {
   max-height: 100%;
 }
 
+img.fit-50 {
+  max-width: 50%;
+  max-height: 50%;
+}
+
 .sh {
   display: -webkit-flex; /* Safari */
   -webkit-align-items: center; /* Safari 7.0+ */
@@ -117,14 +122,67 @@ img.fit {
 .middle h1 {
   margin-top: 3em;
   font-size: 50px;
-  font-family: saman;
   display: block;
+}
+
+.hindi {
+  font-family: saman;
   text-shadow: 3px 3px #333;
+  color: whitesmoke;
+  margin-bottom: 0.5em;
 }
 
 .middle * {
   color: whitesmoke;
   width: 100%;
   text-align: center;
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+  display: -webkit-flex; /* Safari */
+  -webkit-align-items: center; /* Safari 7.0+ */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.home-slider-box {
+  overflow-x: scroll;
+}
+
+.flex-container-slide {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow:row;
+  height:100%;
+  position:absolute;
+  width:100%;
+  /*flex-wrap:wrap;*/
+}
+.box-slide {
+  padding: 20px;
+  color:white;
+  font-size:22px;
+  background-color: crimson;
+  border:1px solid white;
+  flex:1;
+  -webkit-flex:1;
+  text-align:center;
+  min-width:200px;
+}
+.splash-slide {
+  background-image: url(1.jpg);
+  width:100%;
+  background-size:cover;
+  background-position:50% 50%;
+  background-repeat: no-repeat;
+  transition: all 0.6s ease;
+  flex:none;
+  -webkit-flex:none;
 }
 
