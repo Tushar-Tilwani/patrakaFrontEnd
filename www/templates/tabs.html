@@ -37,6 +37,17 @@ navigation history that also transitions its views in and out.
     <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
       <!-- Home Tab -->
+      <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/vendorHome">
+        <ion-nav-view name="tab-home"></ion-nav-view>
+      </ion-tab>
+
+      <!-- Use Tickets Tab -->
+      <ion-tab title="Check Tickets" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper"
+               href="#/tab/checkTickets">
+        <ion-nav-view name="tab-check-tickets"></ion-nav-view>
+      </ion-tab>
+
+      <!-- Shows Tab -->
       <ion-tab title="Shows" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/makeShows">
         <ion-nav-view name="tab-make-shows"></ion-nav-view>
       </ion-tab>

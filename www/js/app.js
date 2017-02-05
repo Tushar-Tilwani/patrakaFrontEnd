@@ -132,6 +132,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             controller: 'MakeShowCtrl'
           }
         }
+      })
+
+      .state('tab.checkTickets', {
+        url: '/checkTickets',
+        views: {
+          'tab-check-tickets': {
+            templateUrl: 'js/controllers/vendor/check-tickets/check-tickets.html',
+            controller: 'CheckTicketCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback
@@ -161,7 +171,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   .run(function ($rootScope) {
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
-      //type: 'business',
-      type: 'personal'
+      type: 'business',
+      //type: 'personal'
     }
   });
