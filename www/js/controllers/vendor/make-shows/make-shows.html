@@ -20,6 +20,9 @@
 
   <ion-content class="padding">
     <div class="list">
+      <div class="item item-divider">
+        Current Shows
+      </div>
       <a ng-repeat="s in shows" class="item item-thumbnail-left" href="#/tab/makeShows/{{s._id}}">
         <img src="{{s.fields.image_url}}">
         <h2>{{s.fields.title}}</h2>
