@@ -2,10 +2,10 @@ angular.module('starter.services')
   .factory('Tickets', ['$http', function ($http) {
     var TICKETS = [{
       "_id": "572bda4df843ec053c061bf5",
-      "companyName": "George Eastman Museum",
+      "companyName": "Paramount",
       "company_id": "572bda4df843ec053c061bf5",
-      "showName": "The Hunger Games",
-      "time": "10:30 am"
+      "showName": "Prisoners",
+      "time": "8:00 pm"
     }];
 
     return {

@@ -1,6 +1,20 @@
 <ion-view view-title="{{ticket.companyName}}">
   <ion-content scroll="false" class="padding">
 
+    <ul class="list">
+      <li class="item item-toggle">
+        <ion-spinner icon="spiral"></ion-spinner>
+        <span>Scanning</span>
+        <label class="toggle toggle-balanced">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+    </ul>
+
+
     <div class="list card">
       <div class="item" href="#">
         <h2>Current User</h2>

@@ -35,7 +35,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     // Each state's controller can be found in controllers.js
     $stateProvider
 
-    // setup an abstract state for the tabs directive
+      .state('login', {
+        url: '/login',
+        templateUrl: 'js/controllers/common/login/login.html',
+        controller: 'LoginCtrl'
+      })
+
+      // setup an abstract state for the tabs directive
       .state('tab', {
         url: '/tab',
         abstract: true,
@@ -43,7 +49,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       })
 
       // Each tab has its own nav history stack:
-
       .state('tab.home', {
         url: '/home',
         views: {
@@ -108,7 +113,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         url: '/aboutUs',
         views: {
           'tab-about-us': {
-            templateUrl: 'js/controllers/user/about-us/about-us.html',
+            templateUrl: 'js/controllers/common/about-us/about-us.html',
             controller: 'AboutUsCtrl'
           }
         }
@@ -171,7 +176,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   .run(function ($rootScope) {
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
-      type: 'business',
-      //type: 'personal'
+      //type: 'business',
+      type: 'personal'
     }
   });
