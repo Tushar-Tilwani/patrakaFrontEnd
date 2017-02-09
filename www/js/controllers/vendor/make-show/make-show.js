@@ -1,11 +1,17 @@
 angular.module('starter.controllers')
-  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Shows, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
+  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Shows, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
     'use strict';
     $scope.times = [];
     $scope.moment = moment;
     $scope.ticketAvailable = 30;
     $scope.price = 10;
+    $scope.theaterNumber = 1;
     $ionicNavBarDelegate.showBackButton(true);
+    $scope.showToAdd = Vendors.showToAdd;
+
+    $scope.show = {
+      isNew: true
+    };
 
     var ipObj1 = {
       callback: function (val) {      //Mandatory
@@ -14,9 +20,6 @@ angular.module('starter.controllers')
         } else {
           //var time = moment(_.toInteger(val * 1000)).utc().format('hh:mm a');
           $scope.times.push(_.toInteger(val));
-          // var selectedTime = new Date(val * 1000);
-          // console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'H :', selectedTime.getUTCMinutes(), 'M');
-
         }
       },
       inputTime: 50400,   //Optional

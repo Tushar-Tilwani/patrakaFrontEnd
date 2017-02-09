@@ -1,65 +1,59 @@
-<ion-view view-title="Show">
+<ion-view view-title="Add Show">
   <ion-content class="padding">
 
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Price:</span>
-        <input type="number" ng-model="price">
-      </label>
-    </div>
+    <div class="card list">
+      <div class="item item-divider">
+        Prisoners
+      </div>
+      <div class="item item-thumbnail-left">
+        <img src="{{showToAdd.fields.image_url}}">
+        <h2>{{showToAdd.fields.title}}</h2>
+        <p>{{_.join(showToAdd.fields.directors)}}</p>
+      </div>
 
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Tickets Avialable:</span>
+      <label class="item item-input ">
+        <span class="input-label">Price</span>
+        <input type="number" placeholder="10.00" ng-model="price">
+      </label>
+      <label class="item item-input ">
+        <span class="input-label">Tickets Avialable</span>
         <input type="number" ng-model="ticketAvailable">
       </label>
+      <label class="item item-input ">
+        <span class="input-label">Theater Number</span>
+        <input type="number" ng-model="theaterNumber">
+      </label>
     </div>
-
-    <div class="card">
+    <div class="card list">
       <div class="item item-divider">
-        Show Timings:
-      </div>
-      <div class="item item-text-wrap row responsive">
-        <div ng-repeat="time in times track by $index" class="col col-50 border-stuff">
-          {{moment(time*1000).utc().format('hh:mm a')}}
-          <a ng-click="remove($index)" class="button button-clear button-small icon ion-close-circled top-right"></a>
-        </div>
-      </div>
-      <div class="item item-divider">
-        <a class="button button-full button-dark" ng-click="openTimePicker()">
-          Add Show
-        </a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="item item-divider">
-        Start Date:
+        Show Timings
       </div>
       <div class="item item-text-wrap">
-        <div class="border-stuff">
-          {{startDate}}
-        </div>
+        <ul class="row responsive-break">
+          <li ng-repeat="time in times track by $index" class="col border-stuff">
+            {{moment(time*1000).utc().format('hh:mm a')}}
+            <a ng-click="remove($index)" class="icon ion-close-circled top-right"></a>
+          </li>
+          <a class="col" ng-click="openTimePicker()">
+            Add more times
+          </a>
+        </ul>
+
       </div>
       <div class="item item-divider">
-        <a ng-click="startDatePicker()" class="button button-full button-dark">
-          Set Date
+        Start Date
+      </div>
+      <div class="item item-text-wrap row responsive-break">
+        <a ng-click="startDatePicker()" class="col border-stuff">
+          {{startDate}}
         </a>
       </div>
-    </div>
-
-    <div class="card">
       <div class="item item-divider">
-        End Date:
+        End Date
       </div>
       <div class="item item-text-wrap row">
-        <div class="border-stuff">
+        <a ng-click="endDatePicker()" class="col border-stuff">
           {{endDate}}
-        </div>
-      </div>
-      <div class="item item-divider">
-        <a ng-click="endDatePicker()" class="button button-full button-dark">
-          Set Date
         </a>
       </div>
     </div>
@@ -70,3 +64,70 @@
 
   </ion-content>
 </ion-view>
+
+<!--<ion-view view-title="Update Show">-->
+  <!--<ion-content class="padding">-->
+
+    <!--<div class="card list">-->
+      <!--<div class="item item-divider">-->
+        <!--Prisoners-->
+      <!--</div>-->
+      <!--<div class="item item-thumbnail-left">-->
+        <!--<img src="http://ia.media-imdb.com/images/M/MV5BMTg0NTIzMjQ1NV5BMl5BanBnXkFtZTcwNDc3MzM5OQ@@._V1_SX400_.jpg">-->
+        <!--<h2 class="ng-binding">Prisoners</h2>-->
+        <!--<p class="ng-binding">Denis Villeneuve</p>-->
+      <!--</div>-->
+
+      <!--<label class="item item-input ">-->
+        <!--<span class="input-label">Price</span>-->
+        <!--<input type="number" placeholder="10.00" ng-model="price">-->
+      <!--</label>-->
+      <!--<label class="item item-input ">-->
+        <!--<span class="input-label">Tickets Avialable</span>-->
+        <!--<input type="number" ng-model="ticketAvailable">-->
+      <!--</label>-->
+      <!--<label class="item item-input ">-->
+        <!--<span class="input-label">Theater Number</span>-->
+        <!--<input type="number" ng-model="theaterNumber">-->
+      <!--</label>-->
+    <!--</div>-->
+    <!--<div class="card list">-->
+      <!--<div class="item item-divider">-->
+        <!--Show Timings-->
+      <!--</div>-->
+      <!--<div class="item item-text-wrap">-->
+        <!--<ul class="row responsive-break">-->
+          <!--<li ng-repeat="time in times track by $index" class="col border-stuff">-->
+            <!--{{moment(time*1000).utc().format('hh:mm a')}}-->
+            <!--<a ng-click="remove($index)" class="icon ion-close-circled top-right"></a>-->
+          <!--</li>-->
+          <!--<a class="col" ng-click="openTimePicker()">-->
+            <!--Add more times-->
+          <!--</a>-->
+        <!--</ul>-->
+
+      <!--</div>-->
+      <!--<div class="item item-divider">-->
+        <!--Start Date-->
+      <!--</div>-->
+      <!--<div class="item item-text-wrap row responsive-break">-->
+        <!--<a ng-click="startDatePicker()" class="col border-stuff">-->
+          <!--{{startDate}}-->
+        <!--</a>-->
+      <!--</div>-->
+      <!--<div class="item item-divider">-->
+        <!--End Date-->
+      <!--</div>-->
+      <!--<div class="item item-text-wrap row">-->
+        <!--<a ng-click="endDatePicker()" class="col border-stuff">-->
+          <!--{{endDate}}-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<button ng-click="createShow()" class="button button-block button-energized">-->
+      <!--Update-->
+    <!--</button>-->
+
+  <!--</ion-content>-->
+<!--</ion-view>-->

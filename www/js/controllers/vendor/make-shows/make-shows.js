@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $ionicNavBarDelegate) {
+  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location) {
     $scope._ = _;
     $scope.addShowTypeAhead = {};
 
@@ -28,13 +28,16 @@ angular.module('starter.controllers')
       $scope.addShowTypeAhead.results = [];
     };
 
-    $scope.add = function () {
+    $scope.makeShow = function () {
       var showId = _.get($scope.addShowTypeAhead.selected, '_id');
-      Vendors.putShowForVendor($rootScope.vendorId, showId)
-        .then(function (response) {
-          console.log(response);
-          _init();
-        });
+      Vendors.showToAdd = $scope.addShowTypeAhead.selected;
+      $location.path('tab/makeShows/' + showId);
+
+      // Vendors.putShowForVendor($rootScope.vendorId, showId)
+      //   .then(function (response) {
+      //     console.log(response);
+      //     _init();
+      //   });
     };
 
     _init();

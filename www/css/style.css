@@ -8,7 +8,7 @@ input.util-pl {
   padding-left: 10px;
 }
 
-input.align-right {
+.align-right {
   text-align: right;
 }
 
@@ -39,6 +39,12 @@ input.align-right {
 
 .row {
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.responsive-break .col {
+  flex-grow: 1;
+  flex-basis: 100%;
 }
 
 .col {
@@ -48,8 +54,11 @@ input.align-right {
 
 .top-right {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -4px;
+  right: 4px;
+  margin: 0;
+  padding: 0;
+  color: #333333;
 }
 
 .border-stuff {
@@ -59,8 +68,6 @@ input.align-right {
   border-color: #387ef5;
   position: relative;
   display: inline-block;
-  margin: 0;
-  padding: 0 12px;
   min-width: 52px;
   min-height: 47px;
   border-width: 1px;
@@ -158,39 +165,45 @@ img.fit-50 {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  flex-flow:row;
-  height:100%;
-  position:absolute;
-  width:100%;
+  flex-flow: row;
+  height: 100%;
+  position: absolute;
+  width: 100%;
   /*flex-wrap:wrap;*/
 }
+
 .box-slide {
   padding: 20px;
-  color:white;
-  font-size:22px;
+  color: white;
+  font-size: 22px;
   background-color: crimson;
-  border:1px solid white;
-  flex:1;
-  -webkit-flex:1;
-  text-align:center;
-  min-width:200px;
+  border: 1px solid white;
+  flex: 1;
+  -webkit-flex: 1;
+  text-align: center;
+  min-width: 200px;
 }
+
 .splash-slide {
   background-image: url(1.jpg);
-  width:100%;
-  background-size:cover;
-  background-position:50% 50%;
+  width: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
   transition: all 0.6s ease;
-  flex:none;
-  -webkit-flex:none;
+  flex: none;
+  -webkit-flex: none;
 }
-.margin-top-large {
-  margin-top: 2em;
-}
-.height-75 {
 
+.margin-top-large {
+  margin-top: 2em !important;
 }
+
 .margin-bottom-large {
   margin-bottom: 2em !important;
 }
+
+.white-bg {
+  background-color: white;
+}
+

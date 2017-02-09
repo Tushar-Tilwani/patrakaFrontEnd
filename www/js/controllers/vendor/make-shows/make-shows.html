@@ -7,14 +7,14 @@
              ng-change="searchShowsByPattern(addShowTypeAhead.searchStr)"
              ng-model="addShowTypeAhead.searchStr">
     </label>
-    <button ng-click="add()" class="button button-clear">
-      Add
+    <button ng-click="makeShow()" class="button button-dark">
+      Add Shows
     </button>
   </ion-header-bar>
 
   <ion-content ng-show="addShowTypeAhead.results.length > 0" class="search-results" scroll="false">
     <div class="list ">
-      <a ng-repeat="s in addShowTypeAhead.results" ng-click="searchItemClick(s)" href="#" class="item">{{s.fields.title}}</a>
+      <a ng-repeat="s in addShowTypeAhead.results" ng-click="searchItemClick(s)" class="item">{{s.fields.title}}</a>
     </div>
   </ion-content>
 
@@ -23,7 +23,7 @@
       <div class="item item-divider">
         Current Shows
       </div>
-      <a ng-repeat="s in shows" class="item item-thumbnail-left" href="#/tab/makeShows/{{s._id}}">
+      <a ng-repeat="s in shows" class="item item-thumbnail-left" ng-click="makeShow()">
         <img src="{{s.fields.image_url}}">
         <h2>{{s.fields.title}}</h2>
         <p>{{_.join(s.fields.directors)}}</p>

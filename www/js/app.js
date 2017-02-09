@@ -176,7 +176,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   .run(function ($rootScope) {
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
-      //type: 'business',
-      type: 'personal'
+      type: 'business',
+      //type: 'personal'
     }
   });
