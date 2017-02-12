@@ -14,7 +14,7 @@
       <!--</ion-item>-->
 
 
-      <a  ng-repeat="vendor in vendors" class="item item-thumbnail-left item-icon-right" href="#/tab/bookTicket/{{vendor._id}}/{{movieId}}">
+      <a  ng-repeat="vendor in vendors" class="item item-thumbnail-left item-icon-right" href="#/tab/bookTicket/{{movieId}}/{{vendor._id}}">
         <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
         <h2>{{vendor.companyName}}</h2>
         <p>{{vendor.type}} | 2 Miles Away </p>

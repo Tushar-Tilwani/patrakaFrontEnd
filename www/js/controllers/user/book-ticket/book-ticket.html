@@ -4,7 +4,7 @@
       <div class="item item-text-wrap">
         Status:
         <soan ng-class="{green : !isHouseFull, yellow : isHouseFull}">
-          {{ticketsAvailable}} Ticket<span ng-if="ticketsAvailable > 1">s</span> Available
+          {{pageData.selectedShow.ticketsAvailable}} Ticket<span ng-if="ticketsAvailable > 1">s</span> Available
         </soan>
 
       </div>
@@ -25,9 +25,8 @@
                   <span class="input-label">
                       Number Of tickets
                   </span>
-        <select ng-model="ticketCount"
-                ng-change="movieUpdatedTicketCount()"
-                ng-options="tc as tc for tc in tcArray"
+        <select ng-model="ticket.count"
+                ng-options="tc as tc for tc in pageData.tcArray"
                 ng-disabled="isHouseFull">
         </select>
       </label>
@@ -35,26 +34,25 @@
 
       <label class="item item-input" ng-click="openDatePicker()">
         <span class="input-label">Date</span>
-        <input class="padding-left align-right" type="text" ng-model="date" readonly>
+        <input class="padding-left align-right" type="text" ng-model="ticket.date" readonly>
         <!--<div>{{date}}</div>-->
       </label>
 
-      <label class="item item-input item-select" ng-if="date">
+      <label class="item item-input item-select">
                   <span class="input-label">
                       Movie Time
                   </span>
-        <select>
-          <option ng-repeat="t in selected.movie.times">{{t}}</option>
+        <select ng-options="obj.value as obj.text for obj in pageData.showTimes" ng-model="pageData.selectedShowTime">
         </select>
       </label>
 
     </div>
-    <button class="button button-full button-balanced">
+    <button ng-click="bookTicket()" class="button button-full button-balanced">
       Book
     </button>
 
     <!--<button class="button bar-balanced">-->
-      <!--<div class="title">Book</div>-->
+    <!--<div class="title">Book</div>-->
     <!--</button>-->
   </ion-content>
 </ion-view>

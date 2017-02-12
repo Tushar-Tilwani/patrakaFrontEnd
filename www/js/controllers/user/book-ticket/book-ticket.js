@@ -1,58 +1,106 @@
 angular.module('starter.controllers')
-  .controller('BookTicketCtrl', function ($scope, Vendors, $stateParams, ionicDatePicker, moment, _) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
-
-    var selectedMovieIndex = 0;
-
-    $scope.vendor = Vendors.get($stateParams.vendorId);
-    $scope.remove = function (vendor) {
-      Vendors.remove(vendor);
+  .controller('BookTicketCtrl', function ($scope, Shows, $stateParams, ionicDatePicker, moment, _) {
+    "use strict";
+    $scope.pageData = {
+      showTimes: [],
+      start_date: null,
+      end_date: null,
+      ticketsAvailable: null,
+      selectedShowTime: null,
+      selectedShow: null
     };
-    $scope.date = moment().format('LL');
 
-    var ipObj1 = {
-      callback: function (val) {  //Mandatory
-        //alert(moment(_.toInteger(val)).format('LL'));
-        $scope.date = moment(_.toInteger(val)).format('LL');
-        //$scope.$apply();
-      },
-      from: moment().toDate(), //Optional
-      to: moment().add(1, 'year').toDate(), //Optional
-      inputDate: moment().toDate(),      //Optional
-      mondayFirst: true,          //Optional
-      closeOnSelect: true,       //Optional
-      templateType: 'popup'       //Optional
+    $scope.ticket = {
+      bookDate: null,
+      date: null,
+      count: null
     };
+
+
+    function setShowTimes(shows) {
+      var showTimesInSecs = _.keys(_.groupBy(shows, 'showTime'));
+
+      $scope.pageData.showTimes = _.map(showTimesInSecs, function (t) {
+        return {
+          text: moment("01-01-1970", "MM-DD-YYYY").add(t, 's').format('LT'),
+          value: t
+        };
+      });
+
+      $scope.pageData.selectedShowTime = _.head($scope.pageData.showTimes).value;
+    }
+
+    function setDatePickerObject() {
+      $scope.pageData.datePickerObject = {
+        callback: function (val) {  //Mandatory
+          $scope.ticket.date = moment(_.toInteger(val)).format('LL');
+          $scope.setSelectedShow();
+        },
+        from: $scope.pageData.start_date,
+        to: $scope.pageData.end_date,
+        inputDate: $scope.pageData.start_date,      //Optional
+        mondayFirst: true,          //Optional
+        closeOnSelect: true,       //Optional
+        templateType: 'popup'       //Optional
+      };
+    }
+
+
+    Shows.getShowsByVendorAndMovie($stateParams.vendorId, $stateParams.movieId)
+      .then(function (response) {
+        $scope.shows = _.sortBy(response.data, 'date');
+
+        setShowTimes($scope.shows);
+
+        $scope.pageData.selectedShow = _.head($scope.shows);
+
+        var startTime = _.head($scope.shows);
+        startTime = (startTime && startTime.date) * 1000;
+        $scope.pageData.start_date = moment(startTime).toDate();
+        $scope.ticket.date = moment(startTime).format('LL');
+        //$scope.ticket.date = $scope.pageData.start_date;
+
+
+        var endTime = _.last($scope.shows);
+        endTime = (endTime && endTime.date) * 1000;
+        $scope.pageData.end_date = moment(endTime).toDate();
+
+        setDatePickerObject();
+      });
+
 
     $scope.openDatePicker = function () {
-      ionicDatePicker.openDatePicker(ipObj1);
+      ionicDatePicker.openDatePicker($scope.pageData.datePickerObject);
     };
 
-    $scope.ticketsAvailable = 3;
-    $scope.ticketCount = _.min([2, $scope.ticketsAvailable]);
-    var maxTicketCount = _.min([10, $scope.ticketsAvailable]);
-    $scope.tcArray = _.times(maxTicketCount, function (i) {
-      return i + 1;
-    });
-    $scope.isHouseFull = $scope.ticketsAvailable < 1;
-
-
-    $scope.selected = {
-      movie: {
-        times:['10:20 am','02:20 pm','10:20 pm']
+    $scope.$watch('pageData.selectedShowTime', function (newValue) {
+      console.log(newValue);
+      if(newValue){
+        $scope.setSelectedShow();
       }
+
+    });
+
+    $scope.setSelectedShow = function () {
+      var time = $scope.pageData.selectedShowTime;
+      var date = $scope.ticket.date;
+      var m = moment(date, "LL").add(time, 's');
+      $scope.pageData.selectedShow = _.find($scope.shows, {date: m.unix()});
+      updateTicketCountArray($scope.pageData.selectedShow.ticketsAvailable);
     };
 
-    $scope.updatedMovie = function () {
-    };
+    function updateTicketCountArray(ta) {
+      $scope.ticket.count = _.min([2, ta]);
+      var maxTicketCount = _.min([10, ta]);
+      $scope.pageData.tcArray = _.times(maxTicketCount, function (i) {
+        return i + 1;
+      });
+      $scope.isHouseFull = $scope.ticketsAvailable < 1;
+    }
 
-    $scope.getSelectedMovieTimings = function () {
-      return $scope.selected.movie.times;
+    $scope.bookTicket = function () {
+      $scope.ticket.bookDate = moment().toDate().toString();
+      $scope.ticket.showId = $scope.pageData.selectedShow._id;
+      console.log($scope.ticket);
     }
   });

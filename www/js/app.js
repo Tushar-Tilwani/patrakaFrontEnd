@@ -119,22 +119,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.makeMovies', {
-        url: '/makeMovies',
+      .state('tab.makeShows', {
+        url: '/makeShows',
         views: {
-          'tab-make-movies': {
-            templateUrl: 'js/controllers/vendor/make-movies/make-movies.html',
-            controller: 'MakeMoviesCtrl'
+          'tab-make-shows': {
+            templateUrl: 'js/controllers/vendor/make-shows/make-shows.html',
+            controller: 'MakeShowsCtrl'
           }
         }
       })
 
-      .state('tab.makeMovie', {
-        url: '/makeMovies/:movieId',
+      .state('tab.makeShow', {
+        url: '/makeShows/:showId',
         views: {
-          'tab-make-movies': {
-            templateUrl: 'js/controllers/vendor/make-movie/make-movie.html',
-            controller: 'MakeMovieCtrl'
+          'tab-make-shows': {
+            templateUrl: 'js/controllers/vendor/make-show/make-show.html',
+            controller: 'MakeShowCtrl'
           }
         }
       })
@@ -150,7 +150,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {
@@ -176,7 +176,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
   .run(function ($rootScope) {
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
-      type: 'business',
-      //type: 'personal'
+      //type: 'business',
+      type: 'personal'
     }
   });
