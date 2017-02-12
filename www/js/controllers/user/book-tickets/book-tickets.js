@@ -1,12 +1,12 @@
 angular.module('starter.controllers')
-  .controller('BookTicketsCtrl', function ($scope, _, Shows) {
+  .controller('BookTicketsCtrl', function ($scope, _, Movies) {
     'use strict';
 
     $scope.populate = function (pattern) {
       pattern = pattern || '*';
-      Shows.getSortedShows(pattern, 'rank', 'asc', 10)
+      Movies.getSortedMovies(pattern, 'rank', 'asc', 10)
         .then(function (response) {
-          $scope.shows = response.data;
+          $scope.movies = response.data;
         });
     };
 

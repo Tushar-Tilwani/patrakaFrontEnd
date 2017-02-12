@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // Hide the accessory bar by default (remove this to movie the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -69,8 +69,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.getVendorsByShow', {
-        url: '/getVendorsByShow/:showId',
+      .state('tab.getVendorsByMovie', {
+        url: '/getVendorsByMovie/:movieId',
         views: {
           'tab-book-tickets': {
             templateUrl: 'js/controllers/user/get-vendors/get-vendors.html',
@@ -80,7 +80,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       })
 
       .state('tab.bookTicket', {
-        url: '/bookTicket/:showId/:vendorId',
+        url: '/bookTicket/:movieId/:vendorId',
         views: {
           'tab-book-tickets': {
             templateUrl: 'js/controllers/user/book-ticket/book-ticket.html',
@@ -119,22 +119,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.makeShows', {
-        url: '/makeShows',
+      .state('tab.makeMovies', {
+        url: '/makeMovies',
         views: {
-          'tab-make-shows': {
-            templateUrl: 'js/controllers/vendor/make-shows/make-shows.html',
-            controller: 'MakeShowsCtrl'
+          'tab-make-movies': {
+            templateUrl: 'js/controllers/vendor/make-movies/make-movies.html',
+            controller: 'MakeMoviesCtrl'
           }
         }
       })
 
-      .state('tab.makeShow', {
-        url: '/makeShows/:showId',
+      .state('tab.makeMovie', {
+        url: '/makeMovies/:movieId',
         views: {
-          'tab-make-shows': {
-            templateUrl: 'js/controllers/vendor/make-show/make-show.html',
-            controller: 'MakeShowCtrl'
+          'tab-make-movies': {
+            templateUrl: 'js/controllers/vendor/make-movie/make-movie.html',
+            controller: 'MakeMovieCtrl'
           }
         }
       })
@@ -150,7 +150,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/home');
+    $urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {
@@ -166,7 +166,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       templateType: 'popup',
       from: new Date(),
       to: new Date(2017, 8, 1),
-      showTodayButton: false,
+      movieTodayButton: false,
       dateFormat: 'dd MMMM yyyy',
       closeOnSelect: true,
       disableWeekdays: []

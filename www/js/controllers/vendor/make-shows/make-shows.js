@@ -1,39 +1,39 @@
 angular.module('starter.controllers')
-  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location) {
+  .controller('MakeMoviesCtrl', function ($rootScope, $scope, Vendors, $location) {
     $scope._ = _;
-    $scope.addShowTypeAhead = {};
+    $scope.addMovieTypeAhead = {};
 
     function _init() {
-      Vendors.getShowsById('5853a2983dc77b661dbf364f')
+      Vendors.getMoviesById('5853a2983dc77b661dbf364f')
         .then(function (response) {
-          $scope.shows = response.data;
+          $scope.movies = response.data;
         });
     }
 
-    $scope.searchShowsByPattern = function (pattern) {
-      $scope.addShowTypeAhead.selected = null;
+    $scope.searchMoviesByPattern = function (pattern) {
+      $scope.addMovieTypeAhead.selected = null;
       if (_.isEmpty(pattern)) {
-        $scope.addShowTypeAhead.results = [];
+        $scope.addMovieTypeAhead.results = [];
         return;
       }
-      Vendors.getShowsByPattern(pattern)
+      Vendors.getMoviesByPattern(pattern)
         .then(function (response) {
-          $scope.addShowTypeAhead.results = response.data;
+          $scope.addMovieTypeAhead.results = response.data;
         });
     };
 
     $scope.searchItemClick = function (item) {
-      $scope.addShowTypeAhead.selected = item;
-      $scope.addShowTypeAhead.searchStr = _.get(item, 'fields.title');
-      $scope.addShowTypeAhead.results = [];
+      $scope.addMovieTypeAhead.selected = item;
+      $scope.addMovieTypeAhead.searchStr = _.get(item, 'fields.title');
+      $scope.addMovieTypeAhead.results = [];
     };
 
-    $scope.makeShow = function () {
-      var showId = _.get($scope.addShowTypeAhead.selected, '_id');
-      Vendors.showToAdd = $scope.addShowTypeAhead.selected;
-      $location.path('tab/makeShows/' + showId);
+    $scope.makeMovie = function () {
+      var movieId = _.get($scope.addMovieTypeAhead.selected, '_id');
+      Vendors.movieToAdd = $scope.addMovieTypeAhead.selected;
+      $location.path('tab/makeMovies/' + movieId);
 
-      // Vendors.putShowForVendor($rootScope.vendorId, showId)
+      // Vendors.putMovieForVendor($rootScope.vendorId, movieId)
       //   .then(function (response) {
       //     console.log(response);
       //     _init();

@@ -1,15 +1,15 @@
 angular.module('starter.controllers')
-  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Shows, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
+  .controller('MakeMovieCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Movies, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
     'use strict';
     $scope.times = [];
     $scope.moment = moment;
     $scope.ticketAvailable = 30;
     $scope.price = 10;
     $scope.theaterNumber = 1;
-    $ionicNavBarDelegate.showBackButton(true);
-    $scope.showToAdd = Vendors.showToAdd;
+    $ionicNavBarDelegate.movieBackButton(true);
+    $scope.movieToAdd = Vendors.movieToAdd;
 
-    $scope.show = {
+    $scope.movie = {
       isNew: true
     };
 
@@ -74,11 +74,11 @@ angular.module('starter.controllers')
       _.pullAt($scope.times, i);
     };
 
-    $scope.createShow = function () {
+    $scope.createMovie = function () {
       var noOfDays = moment($scope.endDate, 'LL').diff(moment($scope.startDate, 'LL'), 'days');
 
       if (_.isEmpty($scope.times)) {
-        alert('Should have at minimum of one show');
+        alert('Should have at minimum of one movie');
         return;
       }
       if (noOfDays < 0) {
@@ -96,32 +96,32 @@ angular.module('starter.controllers')
       }
 
       var obj = {
-        showsTimes: $scope.times,
+        moviesTimes: $scope.times,
         price: $scope.price,
         startDate: $scope.startDate,
         noOfDays: noOfDays,
-        showId: $stateParams.showId,
+        movieId: $stateParams.movieId,
         vendorId: $rootScope.vendorId,
         ticketAvailable: $scope.ticketAvailable
       };
 
-      Shows.postShowForVendor(obj)
+      Movies.postMovieForVendor(obj)
         .then(function (response) {
           console.log(response.data);
-          $ionicNavBarDelegate.showBackButton(false);
-          $state.go('tab.makeShows');
-          //$location.path('#/tab/makeShows');
+          $ionicNavBarDelegate.movieBackButton(false);
+          $state.go('tab.makeMovies');
+          //$location.path('#/tab/makeMovies');
         }, function () {
           console.log('Meh');
         });
 
 
       /*var obj = {
-       showsTimes: <Array<Integer>> Secs,
+       moviesTimes: <Array<Integer>> Secs,
        price: <Float>,
        startDate: <Date>,'12-25-1995'
        noOfDays: Integer,
-       showId:<String>,
+       movieId:<String>,
        vendorId:<String>,
        ticketAvailable:<Integer>
        };*/

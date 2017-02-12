@@ -1,4 +1,4 @@
-<ion-view view-title="Add Show">
+<ion-view view-title="Add Movie">
   <ion-content class="padding">
 
     <div class="card list">
@@ -6,9 +6,9 @@
         Prisoners
       </div>
       <div class="item item-thumbnail-left">
-        <img src="{{showToAdd.fields.image_url}}">
-        <h2>{{showToAdd.fields.title}}</h2>
-        <p>{{_.join(showToAdd.fields.directors)}}</p>
+        <img src="{{movieToAdd.fields.image_url}}">
+        <h2>{{movieToAdd.fields.title}}</h2>
+        <p>{{_.join(movieToAdd.fields.directors)}}</p>
       </div>
 
       <label class="item item-input ">
@@ -26,7 +26,7 @@
     </div>
     <div class="card list">
       <div class="item item-divider">
-        Show Timings
+        Movie Timings
       </div>
       <div class="item item-text-wrap">
         <ul class="row responsive-break">
@@ -58,14 +58,14 @@
       </div>
     </div>
 
-    <button ng-click="createShow()" class="button button-block button-balanced">
+    <button ng-click="createMovie()" class="button button-block button-balanced">
       Create
     </button>
 
   </ion-content>
 </ion-view>
 
-<!--<ion-view view-title="Update Show">-->
+<!--<ion-view view-title="Update Movie">-->
   <!--<ion-content class="padding">-->
 
     <!--<div class="card list">-->
@@ -93,7 +93,7 @@
     <!--</div>-->
     <!--<div class="card list">-->
       <!--<div class="item item-divider">-->
-        <!--Show Timings-->
+        <!--Movie Timings-->
       <!--</div>-->
       <!--<div class="item item-text-wrap">-->
         <!--<ul class="row responsive-break">-->
@@ -125,7 +125,7 @@
       <!--</div>-->
     <!--</div>-->
 
-    <!--<button ng-click="createShow()" class="button button-block button-energized">-->
+    <!--<button ng-click="createMovie()" class="button button-block button-energized">-->
       <!--Update-->
     <!--</button>-->
 

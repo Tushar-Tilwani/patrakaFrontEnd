@@ -18,15 +18,15 @@ angular.module('starter.services')
         "type": "Movie Theater",
         "vicinity": "900 East Avenue, Rochester",
         "spots": [{
-          "name": "show 1",
-          "show_id": "1",
+          "name": "movie 1",
+          "movie_id": "1",
           "times": ["10:30", "10:40", "11:40"],
           "ta": [2, 30, 4],
           "end_date": 90809,
           "start_date": 869876
         }, {
-          "name": "show 2",
-          "show_id": "2",
+          "name": "movie 2",
+          "movie_id": "2",
           "times": ["11:30", "10:40", "11:40"],
           "ta": [2, 3, 4],
           "end_date": 90809,
@@ -51,8 +51,8 @@ angular.module('starter.services')
         "type": "Movie Theater",
         "vicinity": "2190 Empire Boulevard, Webster",
         "spots": [{
-          "name": "show 2",
-          "show_id": "7a2880832fa7fa92da0b9873083c4a828bfdf8a8",
+          "name": "movie 2",
+          "movie_id": "7a2880832fa7fa92da0b9873083c4a828bfdf8a8",
           "times": ["10:30", "10:40", "11:40"],
           "ta": [2, 3, 4],
           "end_date": 90809,
@@ -77,8 +77,8 @@ angular.module('starter.services')
         "type": "Movie Theater",
         "vicinity": "2609 West Henrietta Road, Rochester",
         "spots": [{
-          "name": "show 1",
-          "show_id": "7a2880832fa7fa92da0b9873083c4a828bfdf8a8",
+          "name": "movie 1",
+          "movie_id": "7a2880832fa7fa92da0b9873083c4a828bfdf8a8",
           "times": ["10:30", "10:40", "11:40"],
           "ta": [2, 3, 4],
           "end_date": 90809,
@@ -87,7 +87,7 @@ angular.module('starter.services')
         "id": "cc325d25affc2aaa38fae5499f6b29fb22005e17"
       }
     ];
-    var VENDOR_SHOWS;
+    var VENDOR_MOVIES;
     return {
       all: function () {
         return VENDORS;
@@ -98,20 +98,20 @@ angular.module('starter.services')
       getById: function (vendorId) {
         return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId);
       },
-      getShowsById: function (vendorId) {
-        return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/shows');
+      getMoviesById: function (vendorId) {
+        return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movies');
       },
-      getShowsByPattern: function (pattern) {
-        return $http.get(PROPERTIES.DOMAIN + 'shows/filter/' + pattern);
+      getMoviesByPattern: function (pattern) {
+        return $http.get(PROPERTIES.DOMAIN + 'movies/filter/' + pattern);
       },
-      putShowForVendor: function (vendorId, showId) {
-        return $http.put(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
+      putMovieForVendor: function (vendorId, movieId) {
+        return $http.put(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movie/' + movieId);
       },
-      deleteShowFromVendor: function (vendorId, showId) {
-        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
+      deleteMovieFromVendor: function (vendorId, movieId) {
+        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movie/' + movieId);
       },
-      createShowFromVendor: function (vendorId, showId) {
-        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/show/' + showId);
+      createMovieFromVendor: function (vendorId, movieId) {
+        return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movie/' + movieId);
       },
       remove: function (vendor) {
         VENDORS.splice(VENDORS.indexOf(vendor), 1);

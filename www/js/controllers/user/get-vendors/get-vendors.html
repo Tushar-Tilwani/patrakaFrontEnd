@@ -1,7 +1,7 @@
 <ion-view view-title="Book Tickets">
   <ion-content>
     <div class="list">
-      <!--<ion-item ng-repeat="vendor in vendors" type="item-text-wrap" href="#/tab/bookTicket/{{vendor._id}}/{{showId}}"-->
+      <!--<ion-item ng-repeat="vendor in vendors" type="item-text-wrap" href="#/tab/bookTicket/{{vendor._id}}/{{movieId}}"-->
                 <!--class="item-remove-animate item-avatar item-icon-right">-->
         <!--<img ng-src="http://localhost:3000/static/images/{{vendor.image}}">-->
         <!--<h2>{{vendor.companyName}}</h2>-->
@@ -14,7 +14,7 @@
       <!--</ion-item>-->
 
 
-      <a  ng-repeat="vendor in vendors" class="item item-thumbnail-left item-icon-right" href="#/tab/bookTicket/{{vendor._id}}/{{showId}}">
+      <a  ng-repeat="vendor in vendors" class="item item-thumbnail-left item-icon-right" href="#/tab/bookTicket/{{vendor._id}}/{{movieId}}">
         <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
         <h2>{{vendor.companyName}}</h2>
         <p>{{vendor.type}} | 2 Miles Away </p>
@@ -39,7 +39,7 @@
 
 <!--<ion-content class="padding">-->
 <!--<div class="list">-->
-<!--<a ng-repeat="s in shows" class="item item-thumbnail-left" href="#/tab/makeShows/{{s._id}}">-->
+<!--<a ng-repeat="s in movies" class="item item-thumbnail-left" href="#/tab/makeMovies/{{s._id}}">-->
 <!--<img src="{{s.fields.image_url}}">-->
 <!--<h2>{{s.fields.title}}</h2>-->
 <!--<p>{{_.join(s.fields.directors)}}</p>-->

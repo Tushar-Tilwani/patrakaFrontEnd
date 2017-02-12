@@ -4,7 +4,7 @@ angular.module('starter.services')
       "_id": "572bda4df843ec053c061bf5",
       "companyName": "Paramount",
       "company_id": "572bda4df843ec053c061bf5",
-      "showName": "Prisoners",
+      "movieName": "Prisoners",
       "time": "8:00 pm"
     }];
 

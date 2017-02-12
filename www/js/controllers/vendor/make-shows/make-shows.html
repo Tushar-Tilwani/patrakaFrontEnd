@@ -1,29 +1,29 @@
-<ion-view view-title="Shows">
+<ion-view view-title="Movies">
 
   <ion-header-bar class="bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios7-search placeholder-icon"></i>
       <input type="search" placeholder="Search"
-             ng-change="searchShowsByPattern(addShowTypeAhead.searchStr)"
-             ng-model="addShowTypeAhead.searchStr">
+             ng-change="searchMoviesByPattern(addMovieTypeAhead.searchStr)"
+             ng-model="addMovieTypeAhead.searchStr">
     </label>
-    <button ng-click="makeShow()" class="button button-dark">
-      Add Shows
+    <button ng-click="makeMovie()" class="button button-dark">
+      Add Movies
     </button>
   </ion-header-bar>
 
-  <ion-content ng-show="addShowTypeAhead.results.length > 0" class="search-results" scroll="false">
+  <ion-content ng-movie="addMovieTypeAhead.results.length > 0" class="search-results" scroll="false">
     <div class="list ">
-      <a ng-repeat="s in addShowTypeAhead.results" ng-click="searchItemClick(s)" class="item">{{s.fields.title}}</a>
+      <a ng-repeat="s in addMovieTypeAhead.results" ng-click="searchItemClick(s)" class="item">{{s.fields.title}}</a>
     </div>
   </ion-content>
 
   <ion-content class="padding">
     <div class="list">
       <div class="item item-divider">
-        Current Shows
+        Current Movies
       </div>
-      <a ng-repeat="s in shows" class="item item-thumbnail-left" ng-click="makeShow()">
+      <a ng-repeat="s in movies" class="item item-thumbnail-left" ng-click="makeMovie()">
         <img src="{{s.fields.image_url}}">
         <h2>{{s.fields.title}}</h2>
         <p>{{_.join(s.fields.directors)}}</p>

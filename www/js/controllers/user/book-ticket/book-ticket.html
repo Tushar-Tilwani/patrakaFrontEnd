@@ -13,7 +13,7 @@
     <div class="list">
       <label class="item item-input">
         <span class="input-label">
-          Show
+          Movie
         </span>
         <strong>
           The Hunger Games
@@ -26,7 +26,7 @@
                       Number Of tickets
                   </span>
         <select ng-model="ticketCount"
-                ng-change="showUpdatedTicketCount()"
+                ng-change="movieUpdatedTicketCount()"
                 ng-options="tc as tc for tc in tcArray"
                 ng-disabled="isHouseFull">
         </select>
@@ -41,10 +41,10 @@
 
       <label class="item item-input item-select" ng-if="date">
                   <span class="input-label">
-                      Show Time
+                      Movie Time
                   </span>
         <select>
-          <option ng-repeat="t in selected.show.times">{{t}}</option>
+          <option ng-repeat="t in selected.movie.times">{{t}}</option>
         </select>
       </label>
 

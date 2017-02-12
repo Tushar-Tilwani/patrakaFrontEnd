@@ -8,7 +8,7 @@ angular.module('starter.controllers')
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
-    var selectedShowIndex = 0;
+    var selectedMovieIndex = 0;
 
     $scope.vendor = Vendors.get($stateParams.vendorId);
     $scope.remove = function (vendor) {
@@ -44,15 +44,15 @@ angular.module('starter.controllers')
 
 
     $scope.selected = {
-      show: {
+      movie: {
         times:['10:20 am','02:20 pm','10:20 pm']
       }
     };
 
-    $scope.updatedShow = function () {
+    $scope.updatedMovie = function () {
     };
 
-    $scope.getSelectedShowTimings = function () {
-      return $scope.selected.show.times;
+    $scope.getSelectedMovieTimings = function () {
+      return $scope.selected.movie.times;
     }
   });
