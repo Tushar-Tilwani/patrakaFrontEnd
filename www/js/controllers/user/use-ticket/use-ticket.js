@@ -9,23 +9,43 @@ angular.module('starter.controllers')
     }
 
 
-    var popupData = {
+    var sucessPopupData = {
       title: '<i class="icon ion-checkmark-circled green"></i> Authentication Successful',
       template: ''
     };
 
+    var failedPopupData = {
+      title: '<i class="icon ion-checkmark-circled yellow"></i> Authentication Failed',
+      template: ''
+    };
+
     $scope.useTicket = function () {
-      //$state.go('tab.useTicket');
-
       $scope.isLoading = true;
-      $timeout(function () {
-        $scope.isLoading = false;
-        $ionicPopup.alert(popupData)
-          .then(function (res) {
-            $location.path('tab/useTickets');
-          });
-      }, 1000);
 
+      Tickets.useTicket($scope.ticket._id)
+        .then(function (response) {
+          $ionicPopup.alert(sucessPopupData)
+            .then(function () {
+              scope.isLoading = false;
+              $location.path('tab/useTickets');
+            });
+
+        }, function (error) {
+          failedPopupData.title += ' ' + error.message;
+          $ionicPopup.alert(failedPopupData)
+            .then(function () {
+              scope.isLoading = false;
+            });
+
+        });
+
+      // $timeout(function () {
+      //   $scope.isLoading = false;
+      //   $ionicPopup.alert(popupData)
+      //     .then(function (res) {
+      //       $location.path('tab/useTickets');
+      //     });
+      // }, 1000);
     };
 
   });

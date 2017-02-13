@@ -32,6 +32,9 @@ angular.module('starter.services')
       },
       getCurrentTicket: function () {
         return currentTicket;
+      },
+      useTicket: function (ticketId) {
+        return $http.post(PROPERTIES.DOMAIN + 'useTicket/' + ticketId);
       }
     };
   }]);
