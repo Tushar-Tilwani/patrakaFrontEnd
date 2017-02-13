@@ -11,20 +11,28 @@
 
     <div class="list card">
 
-      <a href="#" class="item item-icon-left">
+      <div class="item item-icon-left">
         <i class="icon ion-home"></i>
-        {{ticket.companyName}}
-      </a>
+        {{ticket.vendor.companyName}}
+      </div>
 
-      <a href="#" class="item item-icon-left">
+      <div class="item item-icon-left">
         <i class="icon ion-film-marker"></i>
-        {{ticket.movieName}}
-      </a>
+        {{ticket.movie.fields.title}}
+      </div>
 
-      <a href="#" class="item item-icon-left">
+      <div class="item item-icon-left">
         <i class="icon ion-clock"></i>
-        {{ticket.time}}
-      </a>
+
+        {{moment.unix(_.toInteger(ticket.date)).format('MMMM Do YYYY, h:mm a')}}
+      </div>
+
+
+      <div class="item item-icon-left">
+        <i class="icon ion-ios-grid-view-outline"></i>
+        Ticket Count: {{ticket.count}}
+      </div>
+
     </div>
     <button ng-click="useTicket()" class="button button-full button-balanced">
       Use Ticket

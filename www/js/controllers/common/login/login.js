@@ -12,14 +12,25 @@ angular.module('starter.controllers')
       if ($scope.loginValues.username === 'vendor') {
         $rootScope.vendorId = '5853a2983dc77b661dbf364f';
         $rootScope.user = {
-          type: 'business'
-        }
+          type: 'vendor'
+        };
       } else {
-        $rootScope.userId = '5853a2983dc77b661dbf364f';
+
         $rootScope.user = {
-          type: 'personal'
-        }
+          "_id": "584de17321add78d386816dc",
+          "first_name": "Martha",
+          "last_name": "Black",
+          "email": "mblack1@patch.com",
+          "gender": "Female",
+          "ip_address": "195.110.142.53",
+          "user_name": "mblack1",
+          "password": "pass",
+          "balance": 148.59,
+          "avatar": "https://robohash.org/consequunturnemoin.png?size=200x200&set=set1",
+          "phone": "+01-984-858-1836",
+          "type": "user"
+        };
       }
       $location.path('/tab/home');
-    }
+    };
   });

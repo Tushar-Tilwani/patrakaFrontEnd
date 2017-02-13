@@ -2,7 +2,7 @@
 
   <ion-content class="padding">
     <!--<ion-item class="item-remove-animate item-thumbnail-left item-icon-right" ng-repeat="ticket in tickets"-->
-    <!--type="item-text-wrap" href="#/tab/useTicket/{{ticket._id}}">-->
+    <!--type="item-text-wrap" ng-click='getToTicket(ticket)'>-->
     <!--<h2>{{ticket.companyName}}</h2>-->
     <!--<p>{{ticket.movie}} :: {{ticket.time}}</p>-->
     <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
@@ -13,32 +13,14 @@
 
 
     <div class="list">
-
-      <a class="item item-thumbnail-left item-icon-right" href="#/tab/useTicket/{{ticket._id}}">
-        <img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"/>
-        <h2>Don Jon @ The Little Theater</h2>
-        <p>Movie: 6:00pm</p>
-        <p>Feb 16<sup>th</sup> 2017</p>
+      <a ng-repeat="ticket in tickets" ng-click="goToTicket(ticket)" class="item item-thumbnail-left item-icon-right"
+      >
+        <img src="{{ticket.movie.fields.image_url}}"/>
+        <h2>{{ticket.movie.fields.title}} @ {{ticket.vendor.companyName}}</h2>
+        <p>Movie: {{moment.unix(_.toInteger(ticket.date)).format('LT')}} </p>
+        <p>{{moment.unix(_.toInteger(ticket.date)).format('LL')}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </a>
-
-      <a class="item item-thumbnail-left item-icon-right" href="#/tab/useTicket/{{ticket._id}}">
-        <img src="http://ia.media-imdb.com/images/M/MV5BMTg0NTIzMjQ1NV5BMl5BanBnXkFtZTcwNDc3MzM5OQ@@._V1_SX400_.jpg"/>
-        <h2>Prisoners @ Paramount</h2>
-        <p>Movie: 8:00pm</p>
-        <p>Feb 16<sup>th</sup> 2017</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </a>
-
-
-      <a class="item item-thumbnail-left item-icon-right" href="#/tab/useTicket/{{ticket._id}}">
-        <img src="http://ia.media-imdb.com/images/M/MV5BMTAyMjQ3OTAxMzNeQTJeQWpwZ15BbWU4MDU0NzA1MzAx._V1_SX400_.jpg"/>
-        <h2>The Hunger Games @ J Theater</h2>
-        <p>Movie: 11:00pm</p>
-        <p>Feb 16<sup>th</sup> 2017</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </a>
-
     </div>
 
   </ion-content>

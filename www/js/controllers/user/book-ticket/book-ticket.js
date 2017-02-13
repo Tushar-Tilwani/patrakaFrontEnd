@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('BookTicketCtrl', function ($scope, Shows, $stateParams, ionicDatePicker, moment, _) {
+  .controller('BookTicketCtrl', function ($scope, $rootScope, Shows, Tickets, $stateParams, ionicDatePicker, moment, _) {
     "use strict";
     $scope.pageData = {
       showTimes: [],
@@ -7,13 +7,17 @@ angular.module('starter.controllers')
       end_date: null,
       ticketsAvailable: null,
       selectedShowTime: null,
-      selectedShow: null
+      selectedShow: null,
+      selectedDate: null
     };
 
     $scope.ticket = {
-      bookDate: null,
       date: null,
-      count: null
+      count: null,
+      userId: $rootScope.user._id,
+      showId: null,
+      movieId: $stateParams.movieId,
+      vendorId: $stateParams.vendorId
     };
 
 
@@ -33,7 +37,7 @@ angular.module('starter.controllers')
     function setDatePickerObject() {
       $scope.pageData.datePickerObject = {
         callback: function (val) {  //Mandatory
-          $scope.ticket.date = moment(_.toInteger(val)).format('LL');
+          $scope.pageData.selectedDate = moment(_.toInteger(val)).format('LL');
           $scope.setSelectedShow();
         },
         from: $scope.pageData.start_date,
@@ -43,6 +47,15 @@ angular.module('starter.controllers')
         closeOnSelect: true,       //Optional
         templateType: 'popup'       //Optional
       };
+    }
+
+    function updateTicketCountArray(ta) {
+      $scope.ticket.count = _.min([2, ta]);
+      var maxTicketCount = _.min([10, ta]);
+      $scope.pageData.tcArray = _.times(maxTicketCount, function (i) {
+        return i + 1;
+      });
+      $scope.isHouseFull = $scope.ticketsAvailable < 1;
     }
 
 
@@ -57,8 +70,8 @@ angular.module('starter.controllers')
         var startTime = _.head($scope.shows);
         startTime = (startTime && startTime.date) * 1000;
         $scope.pageData.start_date = moment(startTime).toDate();
-        $scope.ticket.date = moment(startTime).format('LL');
-        //$scope.ticket.date = $scope.pageData.start_date;
+        $scope.pageData.selectedDate = moment(startTime).format('LL');
+        //$scope.pageData.selectedDate = $scope.pageData.start_date;
 
 
         var endTime = _.last($scope.shows);
@@ -75,7 +88,7 @@ angular.module('starter.controllers')
 
     $scope.$watch('pageData.selectedShowTime', function (newValue) {
       console.log(newValue);
-      if(newValue){
+      if (newValue) {
         $scope.setSelectedShow();
       }
 
@@ -83,24 +96,23 @@ angular.module('starter.controllers')
 
     $scope.setSelectedShow = function () {
       var time = $scope.pageData.selectedShowTime;
-      var date = $scope.ticket.date;
+      var date = $scope.pageData.selectedDate;
       var m = moment(date, "LL").add(time, 's');
       $scope.pageData.selectedShow = _.find($scope.shows, {date: m.unix()});
       updateTicketCountArray($scope.pageData.selectedShow.ticketsAvailable);
     };
 
-    function updateTicketCountArray(ta) {
-      $scope.ticket.count = _.min([2, ta]);
-      var maxTicketCount = _.min([10, ta]);
-      $scope.pageData.tcArray = _.times(maxTicketCount, function (i) {
-        return i + 1;
-      });
-      $scope.isHouseFull = $scope.ticketsAvailable < 1;
-    }
-
     $scope.bookTicket = function () {
-      $scope.ticket.bookDate = moment().toDate().toString();
       $scope.ticket.showId = $scope.pageData.selectedShow._id;
-      console.log($scope.ticket);
-    }
+      //Date to have time at 00:00
+
+      $scope.ticket.date = $scope.pageData.selectedShow.date;
+      //console.log($scope.ticket);
+      Tickets.book($scope.ticket)
+        .then(function (response) {
+          console.log(response);
+        }, function (error) {
+          console.log(error);
+        });
+    };
   });

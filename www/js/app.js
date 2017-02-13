@@ -173,10 +173,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
-  .run(function ($rootScope) {
+  .run(function ($rootScope, moment, _) {
+    $rootScope.moment = moment;
+    $rootScope._ = _;
     $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     $rootScope.user = {
       //type: 'business',
-      type: 'personal'
+      type: 'user',
+      "_id": "584de17321add78d386816dc"
     }
   });
