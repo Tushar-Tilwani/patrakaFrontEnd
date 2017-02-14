@@ -31,7 +31,7 @@ angular.module('starter.controllers')
     $scope.makeMovie = function () {
       var movieId = _.get($scope.addMovieTypeAhead.selected, '_id');
       Vendors.movieToAdd = $scope.addMovieTypeAhead.selected;
-      $location.path('tab/makeMovies/' + movieId);
+      $location.path('vendor/makeMovies/' + movieId);
 
       // Vendors.putMovieForVendor($rootScope.vendorId, movieId)
       //   .then(function (response) {

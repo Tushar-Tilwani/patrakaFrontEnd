@@ -42,14 +42,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       })
 
       // setup an abstract state for the tabs directive
-      .state('tab', {
-        url: '/tab',
+      .state('user', {
+        url: '/user',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        templateUrl: 'templates/user-tabs.html'
       })
 
       // Each tab has its own nav history stack:
-      .state('tab.home', {
+      .state('user.home', {
         url: '/home',
         views: {
           'tab-home': {
@@ -59,7 +59,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.bookTickets', {
+      .state('user.bookTickets', {
         url: '/bookTickets',
         views: {
           'tab-book-tickets': {
@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.getVendorsByMovie', {
+      .state('user.getVendorsByMovie', {
         url: '/getVendorsByMovie/:movieId',
         views: {
           'tab-book-tickets': {
@@ -79,7 +79,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.bookTicket', {
+      .state('user.bookTicket', {
         url: '/bookTicket/:movieId/:vendorId',
         views: {
           'tab-book-tickets': {
@@ -89,7 +89,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.useTickets', {
+      .state('user.useTickets', {
         url: '/useTickets',
         views: {
           'tab-use-tickets': {
@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.useTicket', {
+      .state('user.useTicket', {
         url: '/useTicket/:ticketId',
         views: {
           'tab-use-tickets': {
@@ -109,7 +109,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.aboutUs', {
+      .state('user.aboutUs', {
         url: '/aboutUs',
         views: {
           'tab-about-us': {
@@ -119,7 +119,24 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.makeShows', {
+      .state('vendor', {
+        url: '/vendor',
+        abstract: true,
+        templateUrl: 'templates/vendor-tabs.html'
+      })
+
+      // Each tab has its own nav history stack:
+      .state('vendor.home', {
+        url: '/home',
+        views: {
+          'tab-home': {
+            templateUrl: 'js/controllers/vendor/home/home.html',
+            controller: 'VendorHomeCtrl'
+          }
+        }
+      })
+
+      .state('vendor.makeShows', {
         url: '/makeShows',
         views: {
           'tab-make-shows': {
@@ -129,7 +146,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.makeShow', {
+      .state('vendor.makeShow', {
         url: '/makeShows/:showId',
         views: {
           'tab-make-shows': {
@@ -139,12 +156,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
-      .state('tab.checkTickets', {
+      .state('vendor.checkTickets', {
         url: '/checkTickets',
         views: {
           'tab-check-tickets': {
             templateUrl: 'js/controllers/vendor/check-tickets/check-tickets.html',
             controller: 'CheckTicketCtrl'
+          }
+        }
+      })
+
+      .state('vendor.aboutUs', {
+        url: '/aboutUs',
+        views: {
+          'tab-about-us': {
+            templateUrl: 'js/controllers/common/about-us/about-us.html',
+            controller: 'AboutUsCtrl'
           }
         }
       });
@@ -173,13 +200,20 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
-  .run(function ($rootScope, moment, _) {
+  .run(function ($rootScope, $location, moment, _) {
     $rootScope.moment = moment;
     $rootScope._ = _;
-    $rootScope.vendorId = '5853a2983dc77b661dbf364f';
-    $rootScope.user = {
-      //type: 'business',
-      type: 'user',
-      "_id": "584de17321add78d386816dc"
-    }
+    $rootScope.user = JSON.parse(localStorage.getItem('user'));
+    $rootScope.logOut = function () {
+      localStorage.setItem('user', null);
+      $rootScope.user = null;
+      $location.path('/login');
+    };
+
+    // $rootScope.vendorId = '5853a2983dc77b661dbf364f';
+    // $rootScope.user = {
+    //   // //type: 'business',
+    //   // type: 'user',
+    //   "_id": "584de17321add78d386816dc"
+    // }
   });

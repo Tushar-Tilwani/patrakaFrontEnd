@@ -109,8 +109,8 @@ angular.module('starter.controllers')
         .then(function (response) {
           console.log(response.data);
           $ionicNavBarDelegate.movieBackButton(false);
-          $state.go('tab.makeMovies');
-          //$location.path('#/tab/makeMovies');
+          $state.go('vendor.makeMovies');
+          //$location.path('#/vendor/makeMovies');
         }, function () {
           console.log('Meh');
         });

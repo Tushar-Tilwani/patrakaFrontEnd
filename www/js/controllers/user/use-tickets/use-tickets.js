@@ -11,6 +11,6 @@ angular.module('starter.controllers')
 
     $scope.goToTicket = function (ticket) {
       Tickets.setCurrentTicket(ticket);
-      $location.path('tab/useTicket/' + ticket._id);
+      $location.path('user/useTicket/' + ticket._id);
     };
   });
