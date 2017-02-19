@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
-  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, _) {
+  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, getMySocket, _) {
     $scope.ticket = Tickets.getCurrentTicket();
+    var mySocket;
 
     if (!$scope.ticket) {
       Tickets.get($stateParams.ticketId).then(function (response) {
@@ -8,43 +9,50 @@ angular.module('starter.controllers')
       });
     }
 
+    var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    $ionicPlatform.ready(function () {
+      var _init = function () {
+        $scope.isLoading = true;
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+            $scope.myLoc = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          }, function (err) {
+            $scope.err = err;
+            // error
+          })
+          .finally(function () {
+            $scope.isLoading = false;
+          });
+      };
+      _init();
+    });
 
-    var sucessPopupData = {
-      title: '<i class="icon ion-checkmark-circled green"></i> Authentication Successful',
-      template: ''
-    };
+    function getPopUpData(data) {
+      return {
+        title: data.flag ? '<i class="icon ion-checkmark-circled green"></i> Authentication Successful' : '<i class="icon ion-minus-circled yellow"></i> Authentication Failed <br/>' + _.toString(data.message),
+        template: ''
+      };
+    }
 
-    var failedPopupData = {
-      title: '<i class="icon ion-checkmark-circled yellow"></i> Authentication Failed',
-      template: ''
-    };
 
-    $scope.useTicket = function () {
-      $scope.isLoading = true;
+    $scope.$on("$ionicView.enter", function () {
+      mySocket = getMySocket($rootScope.user._id);
 
-      Tickets.useTicket($scope.ticket._id)
-        .then(function (response) {
-          $ionicPopup.alert(sucessPopupData)
-            .then(function () {
-              $scope.isLoading = false;
-              $location.path('user/useTickets');
-            });
+      mySocket.on('validatedTicketResult', function (data) {
+        $ionicPopup.alert(getPopUpData(data))
+          .then(function () {
+            $scope.isLoading = false;
+          });
+      });
 
-        }, function (error) {
-          failedPopupData.title = '<i class="icon ion-minus-circled yellow"></i> Authentication Failed <br/>' + _.toString(error.data.message);
-          $ionicPopup.alert(failedPopupData)
-            .then(function () {
-              $scope.isLoading = false;
-            });
-        });
+      $scope.useTicket = function () {
+        $scope.isLoading = true;
+        mySocket.emit('validateTicket', {ticketId: $scope.ticket._id, location: $scope.myLoc});
+      };
 
-      // $timeout(function () {
-      //   $scope.isLoading = false;
-      //   $ionicPopup.alert(popupData)
-      //     .then(function (res) {
-      //       $location.path('user/useTickets');
-      //     });
-      // }, 1000);
-    };
-
+    });
   });

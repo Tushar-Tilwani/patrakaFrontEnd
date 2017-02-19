@@ -207,3 +207,6 @@ img.fit-50 {
   background-color: white;
 }
 
+.popup-container .popup {
+  width: auto !important;
+}

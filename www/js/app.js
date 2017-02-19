@@ -177,7 +177,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    //$urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {
@@ -200,7 +200,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
-  .run(function ($rootScope, $location, moment, _) {
+  .run(function ($rootScope, $location, $cordovaGeolocation, $ionicPlatform, moment, _) {
     $rootScope.moment = moment;
     $rootScope._ = _;
     $rootScope.user = JSON.parse(localStorage.getItem('user'));
@@ -209,6 +209,25 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       $rootScope.user = null;
       $location.path('/login');
     };
+
+    var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    $ionicPlatform.ready(function () {
+      var _init = function () {
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+            $rootScope.myLoc = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          }, function (err) {
+            $rootScope.err = err;
+          })
+          .finally(function () {
+          });
+      };
+      _init();
+    });
 
     // $rootScope.vendorId = '5853a2983dc77b661dbf364f';
     // $rootScope.user = {

@@ -1,0 +1,10 @@
+<div class="item item-avatar">
+  <img src="{{data.user.avatar}}">
+  <h2>{{data.count}} Tickets</h2>
+  <p>{{moment.unix(_.toInteger(data.date)).format('LL')}}</p>
+  <p>{{data.movie.fields.title}}</p>
+  <p>Distance: {{data.distance}}</p>
+</div>
+<br/>
+<br/>
+<p>Are you sure you want to confirm ?</p>

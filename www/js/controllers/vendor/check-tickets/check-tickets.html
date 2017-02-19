@@ -1,105 +1,44 @@
 <ion-view view-title="{{ticket.companyName}}">
-  <ion-content scroll="false" class="padding">
+  <ion-content scroll="true" class="padding">
 
     <ul class="list">
       <li class="item item-toggle">
-        <ion-spinner icon="spiral"></ion-spinner>
+        <ion-spinner icon="lines" ng-show="pageData.shouldScan"></ion-spinner>
         <span>Scanning</span>
         <label class="toggle toggle-balanced">
-          <input type="checkbox">
+          <input type="checkbox" ng-model="pageData.shouldScan">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
       </li>
+      <li class="item">
+        Your Location: {{myLoc.lat}} {{myLoc.lng}} {{err}}
+      </li>
     </ul>
 
-
-    <div class="list card">
-      <div class="item" href="#">
-        <h2>Current User</h2>
+    <div class="list">
+      <div class="item item-divider">
+        Previous Users
       </div>
 
-      <div class="item item-body">
-        <div class="row">
-          <div class="col col-33">
-            <img class="fit" src="https://randomuser.me/api/portraits/men/75.jpg">
-          </div>
-          <div class="col col-67">
-            <span class="row">
 
-            <span class="col col-33">
-              Name:
-            </span>
-
-              <strong class="col col-67">
-                Ray Ray
-              </strong>
-
-              </span>
-            <span class="row">
-
-              <span class="col col-33">
-              No of Tickets:
-            </span>
-
-              <strong class="col col-67">
-                2
-              </strong>
-            </span>
-            <span class="row">
-              <span class="col col-33">
-              Movie:
-            </span>
-
-              <strong class="col col-67">
-               The Hunger Games
-              </strong>
-            </span>
-            <span class="row">
-               <span class="col col-33">
-             Theater Number
-            </span>
-
-              <strong class="col col-67">
-               10
-              </strong>
-            </span>
-          </div>
-        </div>
-
+      <div ng-repeat="ticket in previousTickets" class="item item-thumbnail-left">
+        <img src="{{ticket.user.avatar}}">
+        <h2>{{ticket.user.first_name}} {{ticket.user.last_name}} | {{ticket.count}} Tickets</h2>
+        <p>{{moment.unix(_.toInteger(ticket.date)).format('LL')}}</p>
+        <p>{{ticket.movie.fields.title}}</p>
       </div>
+
+      <div class="item item-thumbnail-left">
+        <img src="https://randomuser.me/api/portraits/women/75.jpg">
+        <h2>Marty McFly | 2 Tickets</h2>
+        <p>November 05, 2016</p>
+        <p>The Hunger Games</p>
+      </div>
+
     </div>
 
-    <ion-scroll class="margin-top-large bar-footer" direction="y" style="height: 50%;">
-
-      <div class="list">
-        <div class="item item-divider">
-          Previous Users
-        </div>
-
-        <div class="item item-thumbnail-left">
-          <img src="https://randomuser.me/api/portraits/women/75.jpg">
-          <h2>Nina Ray | 2 Tickets</h2>
-        </div>
-
-        <div class="item item-thumbnail-left">
-          <img src="https://randomuser.me/api/portraits/women/15.jpg">
-          <h2>Rachel Cal | 3 Tickets</h2>
-        </div>
-
-        <div class="item item-thumbnail-left">
-          <img src="https://randomuser.me/api/portraits/men/35.jpg">
-          <h2>Cary Ban | 4 Tickets</h2>
-        </div>
-
-        <div class="item item-thumbnail-left">
-          <img src="https://randomuser.me/api/portraits/men/25.jpg">
-          <h2>Rahul Dev | 1 Tickets</h2>
-        </div>
-      </div>
-
-    </ion-scroll>
 
   </ion-content>
 </ion-view>
