@@ -7,7 +7,7 @@
              ng-change="searchMoviesByPattern(addMovieTypeAhead.searchStr)"
              ng-model="addMovieTypeAhead.searchStr">
     </label>
-    <button ng-click="makeMovie()" class="button button-dark">
+    <button ng-click="makeShow()" class="button button-dark">
       Add Movies
     </button>
   </ion-header-bar>
@@ -23,7 +23,7 @@
       <div class="item item-divider">
         Current Movies
       </div>
-      <a ng-repeat="s in movies" class="item item-thumbnail-left" ng-click="makeMovie()">
+      <a ng-repeat="s in movies" class="item item-thumbnail-left" ng-click="makeShow()">
         <img src="{{s.fields.image_url}}">
         <h2>{{s.fields.title}}</h2>
         <p>{{_.join(s.fields.directors)}}</p>

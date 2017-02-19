@@ -8,7 +8,7 @@ angular.module('starter.controllers')
     };
 
     var gotoHomePage = function () {
-      $rootScope.user.type === 'vendor' ? $location.path('/vendor/home') : $location.path('/user/home');
+      $rootScope.user.type === 'vendor' ? $location.path('/vendor/checkTickets') : $location.path('/user/home');
     };
 
     var setUser = function () {

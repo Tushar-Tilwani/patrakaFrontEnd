@@ -147,7 +147,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       })
 
       .state('vendor.makeShow', {
-        url: '/makeShows/:showId',
+        url: '/makeShows/:movieId',
         views: {
           'tab-make-shows': {
             templateUrl: 'js/controllers/vendor/make-show/make-show.html',
@@ -177,7 +177,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {

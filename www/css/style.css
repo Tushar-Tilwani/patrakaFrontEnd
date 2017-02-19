@@ -184,17 +184,6 @@ img.fit-50 {
   min-width: 200px;
 }
 
-.splash-slide {
-  background-image: url(1.jpg);
-  width: 100%;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  transition: all 0.6s ease;
-  flex: none;
-  -webkit-flex: none;
-}
-
 .margin-top-large {
   margin-top: 2em !important;
 }
@@ -208,5 +197,5 @@ img.fit-50 {
 }
 
 .popup-container .popup {
-  width: auto !important;
+  width: 350px;
 }

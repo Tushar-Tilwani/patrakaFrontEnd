@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('MakeMoviesCtrl', function ($rootScope, $scope, Vendors, $location) {
+  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location) {
     $scope._ = _;
     $scope.addMovieTypeAhead = {};
 
@@ -28,10 +28,10 @@ angular.module('starter.controllers')
       $scope.addMovieTypeAhead.results = [];
     };
 
-    $scope.makeMovie = function () {
+    $scope.makeShow = function () {
       var movieId = _.get($scope.addMovieTypeAhead.selected, '_id');
       Vendors.movieToAdd = $scope.addMovieTypeAhead.selected;
-      $location.path('vendor/makeMovies/' + movieId);
+      $location.path('vendor/makeShows/' + movieId);
 
       // Vendors.putMovieForVendor($rootScope.vendorId, movieId)
       //   .then(function (response) {

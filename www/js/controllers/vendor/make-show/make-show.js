@@ -1,12 +1,12 @@
 angular.module('starter.controllers')
-  .controller('MakeMovieCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Movies, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
+  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Movies, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
     'use strict';
     $scope.times = [];
     $scope.moment = moment;
     $scope.ticketAvailable = 30;
     $scope.price = 10;
     $scope.theaterNumber = 1;
-    $ionicNavBarDelegate.movieBackButton(true);
+    //$ionicNavBarDelegate.movieBackButton(true);
     $scope.movieToAdd = Vendors.movieToAdd;
 
     $scope.movie = {
@@ -108,8 +108,7 @@ angular.module('starter.controllers')
       Movies.postMovieForVendor(obj)
         .then(function (response) {
           console.log(response.data);
-          $ionicNavBarDelegate.movieBackButton(false);
-          $state.go('vendor.makeMovies');
+          //$ionicNavBarDelegate.movieBackButton(false);
           //$location.path('#/vendor/makeMovies');
         }, function () {
           console.log('Meh');
