@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
   .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, getMySocket, _, $ionicHistory, $ionicNavBarDelegate) {
 
-     $ionicHistory.backView();
-     $ionicNavBarDelegate.showBackButton(true);
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = true;
+    });
 
     $scope.backToUseTickets = function () {
       $state.go('user.useTickets');

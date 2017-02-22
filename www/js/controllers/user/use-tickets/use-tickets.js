@@ -2,6 +2,10 @@ angular.module('starter.controllers')
   .controller('UseTicketsCtrl', function ($scope, $rootScope, $stateParams, $location, Tickets) {
     "use strict";
 
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = false;
+    });
+
     $scope.$on("$ionicView.enter", function () {
       Tickets.getByUserId($rootScope.user._id)
         .then(function (response) {
