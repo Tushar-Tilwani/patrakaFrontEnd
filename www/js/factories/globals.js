@@ -6,9 +6,9 @@ angular.module('starter.globals')
   .factory('moment', ['$window', function ($window) {
     return $window.moment;
   }])
-  .factory('getMySocket', function (socketFactory) {
+  .factory('getMySocket', function (socketFactory, PROPERTIES) {
     return function (id) {
-      var myIoSocket = io.connect('http://localhost:3000/', {query: 'id=' + id});
+      var myIoSocket = io.connect(PROPERTIES.DOMAIN, {query: 'id=' + id});
       return socketFactory({
         ioSocket: myIoSocket
       });

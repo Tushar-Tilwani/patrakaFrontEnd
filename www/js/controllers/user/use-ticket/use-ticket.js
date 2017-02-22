@@ -1,5 +1,14 @@
 angular.module('starter.controllers')
-  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, getMySocket, _) {
+  .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, getMySocket, _, $ionicHistory, $ionicNavBarDelegate) {
+
+     $ionicHistory.backView();
+     $ionicNavBarDelegate.showBackButton(true);
+
+    $scope.backToUseTickets = function () {
+      $state.go('user.useTickets');
+      //$location.path()
+    };
+
     $scope.ticket = Tickets.getCurrentTicket();
     var mySocket;
 
@@ -12,7 +21,6 @@ angular.module('starter.controllers')
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     $ionicPlatform.ready(function () {
       var _init = function () {
-        $scope.isLoading = true;
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
@@ -23,9 +31,6 @@ angular.module('starter.controllers')
           }, function (err) {
             $scope.err = err;
             // error
-          })
-          .finally(function () {
-            $scope.isLoading = false;
           });
       };
       _init();
@@ -51,7 +56,11 @@ angular.module('starter.controllers')
 
       $scope.useTicket = function () {
         $scope.isLoading = true;
-        mySocket.emit('validateTicket', {ticketId: $scope.ticket._id, location: $scope.myLoc});
+        var myLoc = {
+          lat: $scope.myLoc.lat || $rootScope.myLoc.lat,
+          lng: $scope.myLoc.lng || $rootScope.myLoc.lng
+        };
+        mySocket.emit('validateTicket', {ticketId: $scope.ticket._id, location: myLoc});
       };
 
     });

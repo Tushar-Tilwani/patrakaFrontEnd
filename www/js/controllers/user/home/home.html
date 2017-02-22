@@ -1,34 +1,22 @@
 <ion-view view-title="Home">
   <ion-nav-buttons side="right">
     <button class="button button-assertive" ng-click="logOut()">
-     Log Out
+      Log Out
     </button>
   </ion-nav-buttons>
   <ion-content class="padding">
     <h1 class="hindi center">Patraka</h1>
-    <div class="list card">
+    <div ng-if="tickets.length" class="list card" >
       <div class="item item-divider">
         Recent Tickets
       </div>
 
-      <a href="#/user/useTicket/{{ticket._id}}" class="item item-icon-left">
+      <a ng-repeat="ticket in tickets" ng-href="#/user/useTicket/{{ticket._id}}" class="item item-icon-left">
         <i class="icon ion-ios-paper-outline"></i>
-        Don Jon <br/>
-        <i class="size-50">Feb 16<sup>th</sup> 2017 </i>
+        {{ticket.movie.fields.title}}<br/>
+        <i class="size-50">{{moment.unix(_.toInteger(ticket.date)).format('MMMM Do YYYY, h:mm a')}}</i>
       </a>
 
-
-      <a href="#/user/useTicket/{{ticket._id}}" class="item item-icon-left">
-        <i class="icon ion-ios-paper-outline"></i>
-        Love Actually <br/>
-        <i class="size-50">Feb 16<sup>th</sup> 2017 </i>
-      </a>
-
-      <a href="#/user/useTicket/{{ticket._id}}" class="item item-icon-left">
-        <i class="icon ion-ios-paper-outline"></i>
-        The Hunger Games <br/>
-        <i class="size-50">Mar 12<sup>th</sup> 2017 </i>
-      </a>
     </div>
 
     <div class="list">
@@ -37,27 +25,27 @@
         Latest Movies
       </div>
 
-      <div class="item item-image home-slider-box" href="#">
+      <div ng-if="movies.length" class="item item-image home-slider-box" href="#">
         <!--<img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg" alt="Don Jon" class="fit">-->
         <ion-slide-box on-slide-changed="slideChanged(index)"
                        movie-pager="false">
-          <ion-slide>
-            <img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"
-                 alt="Don Jon" class="fit-50">
+          <ion-slide ng-repeat="movie in movies">
+            <img src="{{movie.fields.image_url}}"
+                 alt="{{movie.fields.title}}" class="fit-50">
 
           </ion-slide>
 
-          <ion-slide>
-            <img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"
-                 alt="Don Jon" class="fit-50">
+          <!--<ion-slide>-->
+            <!--<img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"-->
+                 <!--alt="Don Jon" class="fit-50">-->
 
-          </ion-slide>
+          <!--</ion-slide>-->
 
-          <ion-slide>
-            <img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"
-                 alt="Don Jon" class="fit-50">
+          <!--<ion-slide>-->
+            <!--<img src="http://ia.media-imdb.com/images/M/MV5BMTQxNTc3NDM2MF5BMl5BanBnXkFtZTcwNzQ5NTQ3OQ@@._V1_SX400_.jpg"-->
+                 <!--alt="Don Jon" class="fit-50">-->
 
-          </ion-slide>
+          <!--</ion-slide>-->
         </ion-slide-box>
 
 

@@ -1,4 +1,9 @@
-<ion-view view-title="{{ticket.companyName}}">
+<ion-view view-title="{{ticket.movie.fields.title}}" hide-back-button="false">
+  <ion-nav-bar class="bar bar-header bar-dark">
+    <ion-nav-back-button class="button-clear" ng-click="backToUseTickets()">
+      <i class="icon ion-ios-arrow-back"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content class="padding" scroll="false">
     <div class="item">
       Your Location: {{myLoc.lat}} {{myLoc.lng}} {{err}}
@@ -33,7 +38,8 @@
       Use Ticket
     </button>
   </ion-content>
-  <ion-content icon="bubbles" class="overlay" ng-if="isLoading">
+
+  <ion-content icon="bubbles" class="overlay" ng-show="isLoading">
     <ion-spinner></ion-spinner>
   </ion-content>
 
