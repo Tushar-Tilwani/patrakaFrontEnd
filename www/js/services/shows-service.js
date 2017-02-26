@@ -5,6 +5,9 @@ angular.module('starter.services')
       getShowsByVendorAndMovie: function (vendorId, movieId) {
         ///movies/:movieId/vendors
         return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movies/' + movieId + '/shows');
+      },
+      generateShows: function (resData) {
+        return $http.post(PROPERTIES.DOMAIN + 'shows', resData);
       }
     };
   }]);

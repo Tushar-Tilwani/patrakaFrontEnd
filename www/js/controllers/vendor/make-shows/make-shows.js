@@ -4,7 +4,7 @@ angular.module('starter.controllers')
     $scope.addMovieTypeAhead = {};
 
     function _init() {
-      Vendors.getMoviesById('5853a2983dc77b661dbf364f')
+      Vendors.getMoviesById($rootScope.user.vendorId)
         .then(function (response) {
           $scope.movies = response.data;
         });
@@ -26,20 +26,23 @@ angular.module('starter.controllers')
       $scope.addMovieTypeAhead.selected = item;
       $scope.addMovieTypeAhead.searchStr = _.get(item, 'fields.title');
       $scope.addMovieTypeAhead.results = [];
+      $scope.makeShow();
     };
 
     $scope.makeShow = function () {
       var movieId = _.get($scope.addMovieTypeAhead.selected, '_id');
       Vendors.movieToAdd = $scope.addMovieTypeAhead.selected;
       $location.path('vendor/makeShows/' + movieId);
-
-      // Vendors.putMovieForVendor($rootScope.vendorId, movieId)
-      //   .then(function (response) {
-      //     console.log(response);
-      //     _init();
-      //   });
     };
 
-    _init();
+    $scope.clear = function () {
+      $scope.addMovieTypeAhead.selected = null;
+      $scope.addMovieTypeAhead.searchStr = '';
+      $scope.addMovieTypeAhead.results = [];
+    };
+
+    $scope.$on("$ionicView.enter", function () {
+      _init();
+    });
 
   });

@@ -35,7 +35,8 @@ angular.module('starter.controllers')
           "balance": 148.59,
           "avatar": "https://robohash.org/consequunturnemoin.png?size=200x200&set=set1",
           "phone": "+01-984-858-1836",
-          "type": "vendor"
+          "type": "vendor",
+          "vendorId": "5853a2983dc77b661dbf364f"
         };
       } else {
         $rootScope.user = {

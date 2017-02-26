@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Movies, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
+  .controller('MakeShowCtrl', function ($rootScope, $scope, $state, $location, $stateParams, Vendors, Movies, Shows, ionicTimePicker, ionicDatePicker, $ionicNavBarDelegate, moment, _) {
     'use strict';
     $scope.times = [];
     $scope.moment = moment;
@@ -95,37 +95,38 @@ angular.module('starter.controllers')
         return;
       }
 
+      // var obj = {
+      //   moviesTimes: $scope.times,
+      //   price: $scope.price,
+      //   startDate: $scope.startDate,
+      //   noOfDays: noOfDays,
+      //   movieId: $stateParams.movieId,
+      //   vendorId: $rootScope._id,
+      //   ticketAvailable: $scope.ticketAvailable,
+      //   theaterNumber: 5
+      // };
+
+      //console.log(obj);
+
       var obj = {
-        moviesTimes: $scope.times,
-        price: $scope.price,
-        startDate: $scope.startDate,
-        noOfDays: noOfDays,
-        movieId: $stateParams.movieId,
-        vendorId: $rootScope.vendorId,
-        ticketAvailable: $scope.ticketAvailable
+        "showsTimes": $scope.times,
+        "price": _.toInteger($scope.price),
+        "startDate": $scope.startDate,
+        "noOfDays": noOfDays,
+        "movieId": $stateParams.movieId,
+        "vendorId": $rootScope.user.vendorId,
+        "ticketsAvailable": $scope.ticketAvailable,
+        "theaterNumber": 5
       };
 
-      Movies.postMovieForVendor(obj)
+      Shows.generateShows(obj)
         .then(function (response) {
-          console.log(response.data);
+          //console.log(response.data);
           //$ionicNavBarDelegate.movieBackButton(false);
-          //$location.path('#/vendor/makeMovies');
+          $location.path('vendor/makeShows');
         }, function () {
           console.log('Meh');
         });
-
-
-      /*var obj = {
-       moviesTimes: <Array<Integer>> Secs,
-       price: <Float>,
-       startDate: <Date>,'12-25-1995'
-       noOfDays: Integer,
-       movieId:<String>,
-       vendorId:<String>,
-       ticketAvailable:<Integer>
-       };*/
-
-
     };
 
   });

@@ -3,12 +3,12 @@
   <ion-header-bar class="bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios7-search placeholder-icon"></i>
-      <input type="search" placeholder="Search"
+      <input type="search" placeholder="Add Movies"
              ng-change="searchMoviesByPattern(addMovieTypeAhead.searchStr)"
              ng-model="addMovieTypeAhead.searchStr">
     </label>
-    <button ng-click="makeShow()" class="button button-dark">
-      Add Movies
+    <button ng-click="clear()" class="button button-dark">
+      Clear
     </button>
   </ion-header-bar>
 
