@@ -1,12 +1,18 @@
 angular.module('starter.controllers')
-  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location) {
+  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location, _, moment) {
     $scope._ = _;
     $scope.addMovieTypeAhead = {};
 
     function _init() {
-      Vendors.getMoviesById($rootScope.user.vendorId)
+      Vendors.getMoviesWithShowsById($rootScope.user.vendorId)
         .then(function (response) {
-          $scope.movies = response.data;
+          $scope.moviesWithShows = _.map(response.data, function (s) {
+            s.showTimes = _.map(s.showTimes, function (t) {
+              return moment("01-01-1970", "MM-DD-YYYY").add(_.toInteger(t), 's').format('LT');
+            });
+            s.end_date = moment(_.toInteger(s.end_date) * 1000).format('LL');
+            return s;
+          });
         });
     }
 
@@ -33,6 +39,10 @@ angular.module('starter.controllers')
       var movieId = _.get($scope.addMovieTypeAhead.selected, '_id');
       Vendors.movieToAdd = $scope.addMovieTypeAhead.selected;
       $location.path('vendor/makeShows/' + movieId);
+    };
+
+    $scope.updateShow = function (movieId) {
+      $location.path('vendor/updateShow/' + movieId);
     };
 
     $scope.clear = function () {

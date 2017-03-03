@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('BookTicketCtrl', function ($scope, $rootScope, Shows, Tickets, $stateParams, ionicDatePicker, moment, _) {
+  .controller('BookTicketCtrl', function ($scope, $rootScope, Shows, Tickets, $stateParams, $ionicHistory, $location, ionicDatePicker, $state, moment, _) {
     "use strict";
     $scope.pageData = {
       showTimes: [],
@@ -71,8 +71,6 @@ angular.module('starter.controllers')
         startTime = (startTime && startTime.date) * 1000;
         $scope.pageData.start_date = moment(startTime).toDate();
         $scope.pageData.selectedDate = moment(startTime).format('LL');
-        //$scope.pageData.selectedDate = $scope.pageData.start_date;
-
 
         var endTime = _.last($scope.shows);
         endTime = (endTime && endTime.date) * 1000;
@@ -110,9 +108,11 @@ angular.module('starter.controllers')
       //console.log($scope.ticket);
       Tickets.book($scope.ticket)
         .then(function (response) {
-          console.log(response);
+          $ionicHistory.clearCache();
+          $ionicHistory.clearHistory();
+          $location.path('user/useTickets');
         }, function (error) {
-          console.log(error);
+          alert(error.message);
         });
     };
   });

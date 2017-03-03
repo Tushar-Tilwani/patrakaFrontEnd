@@ -5,12 +5,14 @@
 
   <ion-content class="padding">
     <div class="list">
-      <div class="item item-divider">
-        Current Movies
-      </div>
-      <div>
-        dsd
-      </div>
+      <label class="item item-input item-select">
+                  <span class="input-label">
+                      Number Of tickets
+                  </span>
+        <select ng-model="ticket.count"
+                ng-options="tc as tc for tc in pageData.dates">
+        </select>
+      </label>
     </div>
   </ion-content>
 </ion-view>

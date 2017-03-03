@@ -101,6 +101,9 @@ angular.module('starter.services')
       getMoviesById: function (vendorId) {
         return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/movies');
       },
+      getMoviesWithShowsById: function (vendorId) {
+        return $http.get(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/MoviesWithShows');
+      },
       getMoviesByPattern: function (pattern) {
         return $http.get(PROPERTIES.DOMAIN + 'movies/filter/' + pattern);
       },

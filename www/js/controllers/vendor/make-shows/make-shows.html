@@ -23,10 +23,11 @@
       <div class="item item-divider">
         Current Movies
       </div>
-      <a ng-repeat="s in movies" class="item item-thumbnail-left" ng-click="makeShow()">
-        <img src="{{s.fields.image_url}}">
-        <h2>{{s.fields.title}}</h2>
-        <p>{{_.join(s.fields.directors)}}</p>
+      <a ng-repeat="s in moviesWithShows" class="item item-thumbnail-left" ng-click="updateShow(s.movie._id)">
+        <img src="{{s.movie.fields.image_url}}">
+        <h2>{{s.movie.fields.title}}</h2>
+        <p>{{_.join(s.movie.fields.directors)}}</p>
+        <p>Shows: {{_.join(s.showTimes,', ')}} | Ends: {{s.end_date}}</p>
       </a>
     </div>
   </ion-content>

@@ -1,6 +1,7 @@
 angular.module('starter.services')
   .factory('Movies', ['$http', 'PROPERTIES', function ($http, PROPERTIES) {
     "use strict";
+    var currentMovie = null;
     return {
       postMovieForVendor: function (data) {
         return $http.post(PROPERTIES.DOMAIN + 'shows', data);
@@ -14,6 +15,12 @@ angular.module('starter.services')
       getVendorsByMovieId: function (movieId) {
         ///movies/:movieId/vendors
         return $http.get(PROPERTIES.DOMAIN + 'movies/' + movieId + '/vendors');
+      },
+      getCurrentMovie: function () {
+        return currentMovie;
+      },
+      setCurrentMovie: function (movie) {
+        currentMovie = movie;
       }
     };
   }]);

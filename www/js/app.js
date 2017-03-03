@@ -156,6 +156,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
+      .state('vendor.updateShow', {
+        url: '/updateShow/:movieId',
+        views: {
+          'tab-make-shows': {
+            templateUrl: 'js/controllers/vendor/update-show/update-show.html',
+            controller: 'UpdateShowCtrl'
+          }
+        }
+      })
+
       .state('vendor.checkTickets', {
         url: '/checkTickets',
         views: {
@@ -177,7 +187,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {
@@ -200,13 +210,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
-  .run(function ($rootScope, $location, $cordovaGeolocation, $ionicPlatform, moment, _) {
+  .run(function ($rootScope, $location, $cordovaGeolocation, $ionicPlatform, $ionicHistory, moment, _) {
     $rootScope.moment = moment;
     $rootScope._ = _;
     $rootScope.user = JSON.parse(localStorage.getItem('user'));
     $rootScope.logOut = function () {
       localStorage.setItem('user', null);
       $rootScope.user = null;
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
       $location.path('/login');
     };
 
