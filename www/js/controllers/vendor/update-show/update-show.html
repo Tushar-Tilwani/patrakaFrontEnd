@@ -1,18 +1,98 @@
 <ion-view view-title="{{movie.fields.title}}">
 
-  <ion-header-bar class="bar-subheader item-input-inset">
-  </ion-header-bar>
-
   <ion-content class="padding">
+    <div class="list">
+      <div class="item item-thumbnail-left">
+        <img src="{{movie.fields.image_url}}">
+        <h2>{{movie.fields.title}}</h2>
+        <p>{{_.join(movie.fields.directors)}}</p>
+      </div>
+    </div>
+
     <div class="list">
       <label class="item item-input item-select">
                   <span class="input-label">
                       Number Of tickets
                   </span>
-        <select ng-model="ticket.count"
+        <select ng-model="pageData.selectedDate"
                 ng-options="tc as tc for tc in pageData.dates">
         </select>
       </label>
+
+      <label ng-if="pageData.selectedDate" class="item item-input item-select">
+                  <span class="input-label">
+                      Movie Time
+                  </span>
+        <select ng-options="obj.value as obj.text for obj in pageData.visibleShowTimes"
+                ng-model="pageData.selectedShow">
+        </select>
+      </label>
+
     </div>
+
+
+    <!--/*-->
+    <!--"58b8f026d030d3f01b082cfa"-->
+    <!--date-->
+    <!--:-->
+    <!--1488502800-->
+    <!--movieId-->
+    <!--:-->
+    <!--"584cd68821add78d386802f0"-->
+    <!--price-->
+    <!--:-->
+    <!--10-->
+    <!--showTime-->
+    <!--:-->
+    <!--61200-->
+    <!--sold-->
+    <!--:-->
+    <!--0-->
+    <!--theaterNumber-->
+    <!--:-->
+    <!--1-->
+    <!--ticketsAvailable-->
+    <!--:-->
+    <!--150-->
+    <!--vendorId-->
+    <!--:-->
+    <!--"5853a2983dc77b661dbf364f"-->
+    <!--*/-->
+    <!---->
+
+
+    <div ng-if="pageData.selectedShow" class="list card">
+
+      <div class="item item-divider">
+        Show Details
+      </div>
+
+      <label class="item item-input">
+        <span class="input-label">Price</span>
+        <input type="number" value="{{pageData.selectedShow.price}}" ng-model="pageData.selectedShow.price">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Theater Number</span>
+        <input type="text" value="{{pageData.selectedShow.theaterNumber}}" ng-model="pageData.selectedShow.theaterNumber">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Tickets Available</span>
+        <input type="text" value="{{pageData.selectedShow.ticketsAvailable}}"
+               ng-model="pageData.selectedShow.ticketsAvailable">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Sold Tickets</span>
+        <input type="text" disabled value="{{pageData.selectedShow.sold}}">
+      </label>
+
+    </div>
+
+    <button ng-if="pageData.selectedShow" ng-click="updateShow()" class="button button-block button-energized">
+      Update
+    </button>
+
   </ion-content>
 </ion-view>

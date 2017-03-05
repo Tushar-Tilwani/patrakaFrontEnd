@@ -8,6 +8,9 @@ angular.module('starter.services')
       },
       generateShows: function (resData) {
         return $http.post(PROPERTIES.DOMAIN + 'shows', resData);
+      },
+      updateShow: function (show) {
+        return $http.put(PROPERTIES.DOMAIN + 'shows/' + show._id, show);
       }
     };
   }]);

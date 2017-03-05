@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, $location, _, moment) {
+  .controller('MakeShowsCtrl', function ($rootScope, $scope, Vendors, Movies, $location, _, moment) {
     $scope._ = _;
     $scope.addMovieTypeAhead = {};
 
@@ -41,8 +41,9 @@ angular.module('starter.controllers')
       $location.path('vendor/makeShows/' + movieId);
     };
 
-    $scope.updateShow = function (movieId) {
-      $location.path('vendor/updateShow/' + movieId);
+    $scope.updateShow = function (movie) {
+      Movies.setCurrentMovie(movie);
+      $location.path('vendor/updateShow/' + movie._id);
     };
 
     $scope.clear = function () {

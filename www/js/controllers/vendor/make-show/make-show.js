@@ -116,7 +116,7 @@ angular.module('starter.controllers')
         "movieId": $stateParams.movieId,
         "vendorId": $rootScope.user.vendorId,
         "ticketsAvailable": $scope.ticketAvailable,
-        "theaterNumber": 5
+        "theaterNumber": $scope.theaterNumber
       };
 
       Shows.generateShows(obj)

@@ -23,7 +23,7 @@
       <div class="item item-divider">
         Current Movies
       </div>
-      <a ng-repeat="s in moviesWithShows" class="item item-thumbnail-left" ng-click="updateShow(s.movie._id)">
+      <a ng-repeat="s in moviesWithShows" class="item item-thumbnail-left" ng-click="updateShow(s.movie)">
         <img src="{{s.movie.fields.image_url}}">
         <h2>{{s.movie.fields.title}}</h2>
         <p>{{_.join(s.movie.fields.directors)}}</p>
