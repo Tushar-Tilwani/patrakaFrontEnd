@@ -1,8 +1,28 @@
 <ion-view view-title="Use Tickets">
 
   <ion-content class="padding">
-    <div class="list">
-      <a ng-repeat="ticket in tickets" ng-click="goToTicket(ticket)" class="item item-thumbnail-left item-icon-right"
+    <div class="list" ng-if="activeTickets.length">
+      <div class="item item-divider">
+        Active Tickets
+      </div>
+      <a ng-repeat="ticket in activeTickets" ng-click="goToTicket(ticket)"
+         class="item item-thumbnail-left item-icon-right"
+      >
+        <img src="{{ticket.movie.fields.image_url}}"/>
+        <h2>{{ticket.movie.fields.title}} @ {{ticket.vendor.companyName}}</h2>
+        <p>Movie: {{moment.unix(_.toInteger(ticket.date)).format('LT')}} </p>
+        <p>{{moment.unix(_.toInteger(ticket.date)).format('LL')}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </a>
+    </div>
+
+
+    <div class="list" ng-if="inactiveTickets.length">
+      <div class="item item-divider">
+        Inactive Tickets
+      </div>
+      <a ng-repeat="ticket in inactiveTickets" ng-click="goToTicket(ticket)"
+         class="item item-thumbnail-left item-icon-right"
       >
         <img src="{{ticket.movie.fields.image_url}}"/>
         <h2>{{ticket.movie.fields.title}} @ {{ticket.vendor.companyName}}</h2>

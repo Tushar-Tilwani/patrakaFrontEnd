@@ -51,6 +51,11 @@ angular.module('starter.controllers')
       mySocket.on('validatedTicketResult', function (data) {
         $ionicPopup.alert(getPopUpData(data))
           .then(function () {
+            if (data.flag) {
+              $ionicHistory.clearHistory();
+              $ionicHistory.clearCache();
+              $location.path('/useTickets');
+            }
             $scope.isLoading = false;
           });
       });

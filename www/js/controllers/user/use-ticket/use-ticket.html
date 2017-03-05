@@ -34,7 +34,7 @@
       </div>
 
     </div>
-    <button ng-click="useTicket()" class="button button-full button-balanced">
+    <button ng-if="ticket.status !== 'inactive'" ng-click="useTicket()" class="button button-full button-balanced">
       Use Ticket
     </button>
   </ion-content>
