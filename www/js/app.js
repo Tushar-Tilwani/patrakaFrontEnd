@@ -176,6 +176,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
+      .state('vendor.blacklistUsers', {
+        url: '/blacklistUsers',
+        views: {
+          'tab-blacklist-users': {
+            templateUrl: 'js/controllers/vendor/blacklist-users/blacklist-users.html',
+            controller: 'BlacklistUsersCtrl'
+          }
+        }
+      })
+
       .state('vendor.aboutUs', {
         url: '/aboutUs',
         views: {
