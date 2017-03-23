@@ -24,13 +24,15 @@ angular.module('starter.controllers')
 
 
     $scope.searchUsersByPattern = function (str) {
-      Users.getUsersByNamePattern(str)
-        .then(function (response) {
-          $scope.addUserTypeAhead.results = response.data;
-          console.log($scope.addUserTypeAhead.results);
-        }, function () {
-
-        });
+      if (_.isEmpty(str)) {
+        $scope.addUserTypeAhead.results = [];
+      } else {
+        Users.getUsersByNamePattern(str)
+          .then(function (response) {
+            $scope.addUserTypeAhead.results = response.data;
+          }, function () {
+          });
+      }
     };
 
     $scope.searchItemClick = function (s) {

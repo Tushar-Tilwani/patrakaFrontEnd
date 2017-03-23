@@ -28,7 +28,8 @@ angular.module('starter.controllers')
           localStorage.setItem('user', JSON.stringify($rootScope.user));
           gotoHomePage();
         }, function (error) {
-          alert(error.data.message);
+          var msg = _.get(error, 'data.message');
+          alert(msg || 'No Internet Connectivity');
         });
     };
   });
