@@ -14,11 +14,10 @@
            class="item item-thumbnail-left item-icon-right">
         <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
         <h2>{{vendor.companyName}}</h2>
-        <p>{{vendor.type}} | Distance: {{ _.round(_.getDistance(vendor.location, myLoc), 2)}} Miles</p>
+        <p>Distance: {{ _.getDistance(vendor.location, myLoc)}} Miles</p>
 
         <a class="button button-small button-clear button-calm"
-           href="https://www.google.com/maps?saddr=My+Location&daddr={{vendor.location.lat}},{{vendor.location.lng}}"
-           target="_blank">
+           ng-click="goToLink(vendor)">
           Get Directions
         </a>
 

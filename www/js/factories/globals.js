@@ -1,10 +1,11 @@
 angular.module('starter.globals')
   .factory('_', ['$window', function ($window) {
 
-    function getDistance(loc1, loc2, unit) {
+    function getDistance(loc1, loc2, unit, roundOff) {
       if (!loc1 || !loc2) {
         return;
       }
+      roundOff = roundOff || 2;
       var lat1 = loc1.lat;
       var lat2 = loc2.lat;
       var lng1 = loc1.lng;
@@ -23,7 +24,7 @@ angular.module('starter.globals')
       if (unit == "N") {
         dist = dist * 0.8684;
       }
-      return dist;
+      return _.round(dist, roundOff);
     }
 
     _.mixin({'getDistance': getDistance});

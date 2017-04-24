@@ -3,7 +3,28 @@ angular.module('starter.controllers')
 
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
+
+      var posOptions = {timeout: 10000, enableHighAccuracy: true};
+      $ionicPlatform.ready(function () {
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+            $rootScope.myLoc = _.defaults({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }, $rootScope.myLoc);
+
+            $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
+
+          }, function (err) {
+            $scope.err = err;
+            // error
+          }).finally(function () {
+        });
+      });
+
     });
+
 
     $scope.backToUseTickets = function () {
       $state.go('user.useTickets');
@@ -13,29 +34,30 @@ angular.module('starter.controllers')
     $scope.ticket = Tickets.getCurrentTicket();
     var mySocket;
 
-    if (!$scope.ticket) {
-      Tickets.get($stateParams.ticketId).then(function (response) {
+    Tickets.get($stateParams.ticketId)
+      .then(function (response) {
         $scope.ticket = response.data;
+        $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
       });
-    }
 
-    var posOptions = {timeout: 10000, enableHighAccuracy: true};
-    $ionicPlatform.ready(function () {
-      var _init = function () {
-        $cordovaGeolocation
-          .getCurrentPosition(posOptions)
-          .then(function (position) {
-            $scope.myLoc = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-          }, function (err) {
-            $scope.err = err;
-            // error
-          });
-      };
-      _init();
-    });
+    // var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    // $ionicPlatform.ready(function () {
+    //   $cordovaGeolocation
+    //     .getCurrentPosition(posOptions)
+    //     .then(function (position) {
+    //       $rootScope.myLoc = _.defaults({
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude
+    //       }, $rootScope.myLoc);
+    //
+    //       $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
+    //
+    //     }, function (err) {
+    //       $scope.err = err;
+    //       // error
+    //     }).finally(function () {
+    //   });
+    // });
 
     function getPopUpData(data) {
       return {

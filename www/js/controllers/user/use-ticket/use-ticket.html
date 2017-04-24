@@ -6,7 +6,9 @@
   </ion-nav-bar>
   <ion-content class="padding" scroll="false">
     <div class="item">
-      Your Location: {{myLoc.lat}} {{myLoc.lng}} {{err}}
+      Distance:
+      <span ng-if="vendorDistance">{{vendorDistance + 'Miles'}} </span>
+      <span ng-if="!vendorDistance">calculating....</span>
     </div>
 
     <div class="list card">
