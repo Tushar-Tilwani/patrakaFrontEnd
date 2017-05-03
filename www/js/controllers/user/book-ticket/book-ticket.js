@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('BookTicketCtrl', function ($scope, $rootScope, Shows, Tickets, $stateParams, $ionicHistory, $location, ionicDatePicker, $state, moment, _) {
+  .controller('BookTicketCtrl', function ($scope, $rootScope, Shows, Tickets, Movies, $stateParams, $ionicHistory, $location, ionicDatePicker, $state, moment, _) {
     "use strict";
     $scope.pageData = {
       showTimes: [],
@@ -19,6 +19,8 @@ angular.module('starter.controllers')
       movieId: $stateParams.movieId,
       vendorId: $stateParams.vendorId
     };
+
+    $scope.movie = Movies.getCurrentMovie();
 
 
     function setShowTimes(shows) {
@@ -77,8 +79,15 @@ angular.module('starter.controllers')
         $scope.pageData.end_date = moment(endTime).toDate();
 
         setDatePickerObject();
-      });
 
+        var movie = Movies.getCurrentMovie();
+        return movie ? q.when(movie) : Movies.getMovieById($stateParams.movieId).then(function (response) {
+          return response.data;
+        });
+      })
+      .then(function (movie) {
+        $scope.movie = movie;
+      });
 
     $scope.openDatePicker = function () {
       ionicDatePicker.openDatePicker($scope.pageData.datePickerObject);

@@ -8,9 +8,11 @@ angular.module('starter.services')
       },
       getSortedMovies: function (pattern, field, order, pageSize) {
         //http://localhost:3000/movies/filter/*/field/rank/order/asc/pageSize/10
-
         return $http.get(PROPERTIES.DOMAIN + 'movies/filter/' + pattern + '/field/' + field + '/order/' + order + '/pageSize/' + pageSize);
 
+      },
+      getMovieById: function (movieId) {
+        return $http.get(PROPERTIES.DOMAIN + 'movies/' + movieId);
       },
       getVendorsByMovieId: function (movieId) {
         ///movies/:movieId/vendors

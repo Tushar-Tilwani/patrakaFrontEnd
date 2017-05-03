@@ -22,7 +22,6 @@ angular.module('starter.controllers')
           }).finally(function () {
         });
       });
-
     });
 
 
@@ -39,25 +38,6 @@ angular.module('starter.controllers')
         $scope.ticket = response.data;
         $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
       });
-
-    // var posOptions = {timeout: 10000, enableHighAccuracy: true};
-    // $ionicPlatform.ready(function () {
-    //   $cordovaGeolocation
-    //     .getCurrentPosition(posOptions)
-    //     .then(function (position) {
-    //       $rootScope.myLoc = _.defaults({
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //       }, $rootScope.myLoc);
-    //
-    //       $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
-    //
-    //     }, function (err) {
-    //       $scope.err = err;
-    //       // error
-    //     }).finally(function () {
-    //   });
-    // });
 
     function getPopUpData(data) {
       return {

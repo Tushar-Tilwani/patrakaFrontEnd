@@ -20,7 +20,11 @@ angular.module('starter.controllers')
     }
 
     $scope.goToLink = function (vendor) {
-      document.addEventListener('deviceready', function () {
+      window.open(url({location: vendor.location}), "_blank");
+    };
+
+    document.addEventListener('deviceready', function () {
+      $scope.goToLink = function (vendor) {
         $cordovaInAppBrowser.open(url({location: vendor.location}), '_system', options)
           .then(function (event) {
             // success
@@ -29,8 +33,8 @@ angular.module('starter.controllers')
             // error
           });
         //$cordovaInAppBrowser.close();
-      }, false);
-    };
+      };
+    }, false);
 
     _init();
   });
