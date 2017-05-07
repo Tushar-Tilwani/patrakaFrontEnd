@@ -9,7 +9,7 @@ angular.module('starter.controllers', []);
 angular.module('starter.services', []);
 angular.module('starter.globals', []);
 
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'ionic-timepicker', 'btford.socket-io'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'ionic-timepicker', 'btford.socket-io', 'datatables'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -192,6 +192,23 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
           'tab-about-us': {
             templateUrl: 'js/controllers/common/about-us/about-us.html',
             controller: 'AboutUsCtrl'
+          }
+        }
+      })
+
+      // setup an abstract state for the tabs directive
+      .state('admin', {
+        url: '/admin',
+        abstract: true,
+        templateUrl: 'templates/admin-tabs.html'
+      })
+
+      .state('admin.movies', {
+        url: '/listMovies',
+        views: {
+          'tab-list-movies': {
+            templateUrl: 'js/controllers/admin/list-movies/list-movies.html',
+            controller: 'ListMoviesCtrl'
           }
         }
       });

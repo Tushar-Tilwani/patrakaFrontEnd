@@ -199,3 +199,19 @@ img.fit-50 {
 .popup-container .popup {
   width: 350px;
 }
+
+thead {
+  background-color: white;
+}
+
+.dataTables_filter input {
+  display: inline-block !important;
+}
+
+.dataTables_paginate, .dataTables_info, .dataTables_filter, dataTables_length {
+  text-shadow: 4px 4px 17px rgba(150, 150, 150, 1);
+}
+
+.dataTables_wrapper {
+  background-color: whitesmoke;
+}

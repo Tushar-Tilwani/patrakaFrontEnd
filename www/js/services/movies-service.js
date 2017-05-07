@@ -11,6 +11,9 @@ angular.module('starter.services')
         return $http.get(PROPERTIES.DOMAIN + 'movies/filter/' + pattern + '/field/' + field + '/order/' + order + '/pageSize/' + pageSize);
 
       },
+      getAllMovies: function () {
+        return $http.get(PROPERTIES.DOMAIN + 'movies');
+      },
       getMovieById: function (movieId) {
         return $http.get(PROPERTIES.DOMAIN + 'movies/' + movieId);
       },

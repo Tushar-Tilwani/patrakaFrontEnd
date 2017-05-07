@@ -20,6 +20,7 @@ angular.module('starter.controllers')
         });
     });
 
+
     $scope.goToTicket = function (ticket) {
       Tickets.setCurrentTicket(ticket);
       $location.path('user/useTicket/' + ticket._id);
