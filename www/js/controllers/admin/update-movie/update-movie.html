@@ -1,0 +1,75 @@
+<ion-view view-title="Update Movie">
+  <ion-nav-buttons side="right">
+    <button class="button button-assertive" ng-click="logOut()">
+      Log Out
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content padding="true">
+
+    <button class="button margin-bottom-large icon-left ion-edit button-energized">
+      Update
+    </button>
+
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input type="text" ng-model="title">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Plot</span>
+        <textarea></textarea>
+      </label>
+
+      <label class="item item-input" ng-click="releaseDatePicker()">
+        <span class="input-label">Release Date</span>
+        <input type="text" ng-model="releaseDate">
+      </label>
+
+
+      <label class="item item-input">
+        <span class="input-label">Directors</span>
+        <input type="text" placeholder="Comma-delimited list">
+      </label>
+
+
+      <label class="item item-input">
+        <span class="input-label">Actors</span>
+        <input type="text" placeholder="Comma-delimited list">
+      </label>
+
+
+      <label class="item item-input">
+        <span class="input-label">Genres</span>
+        <input type="text" placeholder="Comma-delimited list">
+      </label>
+
+
+      <label class="item item-input">
+        <span class="input-label">Running Time</span>
+        <input type="text" placeholder="In Minutes">
+      </label>
+
+    </div>
+
+    <div class="list ">
+
+      <div class="item center">
+        <h2>{{title}}</h2>
+      </div>
+
+      <div class="item">
+        <input ng-model="uploadDownloads" type="file" fd-input file-name="fileName"/>
+      </div>
+
+
+      <div class="item item-image">
+        <img id="fileImg"/>
+      </div>
+
+    </div>
+
+
+  </ion-content>
+</ion-view>

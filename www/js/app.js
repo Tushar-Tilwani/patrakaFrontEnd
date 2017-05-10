@@ -203,12 +203,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         templateUrl: 'templates/admin-tabs.html'
       })
 
-      .state('admin.movies', {
+      .state('admin.listMovies', {
         url: '/listMovies',
         views: {
           'tab-list-movies': {
             templateUrl: 'js/controllers/admin/list-movies/list-movies.html',
             controller: 'ListMoviesCtrl'
+          }
+        }
+      })
+
+      .state('admin.updateMovie', {
+        url: '/updateMovie/:movieId',
+        views: {
+          'tab-list-movies': {
+            templateUrl: 'js/controllers/admin/update-movie/update-movie.html',
+            controller: 'UpdateMovieCtrl'
           }
         }
       });
@@ -229,7 +239,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
       templateType: 'popup',
       from: new Date(),
-      to: new Date(2017, 8, 1),
+      to: new Date(2017, 12, 31),
       movieTodayButton: false,
       dateFormat: 'dd MMMM yyyy',
       closeOnSelect: true,
