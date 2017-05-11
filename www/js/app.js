@@ -221,6 +221,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             controller: 'UpdateMovieCtrl'
           }
         }
+      })
+
+      .state('admin.addMovie', {
+        url: '/addMovie',
+        views: {
+          'tab-list-movies': {
+            templateUrl: 'js/controllers/admin/add-movie/add-movie.html',
+            controller: 'AddMovieCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback

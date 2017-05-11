@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('UpdateMovieCtrl', function ($scope, Movies, $stateParams, ionicDatePicker, _, moment) {
+  .controller('AddMovieCtrl', function ($scope, Movies, $stateParams, ionicDatePicker, _, moment) {
 
     var releaseDateObj = {
       callback: function (val) {  //Mandatory
@@ -17,7 +17,7 @@ angular.module('starter.controllers')
       ionicDatePicker.openDatePicker(releaseDateObj);
     };
 
-
+    $scope.currentMovie = {};
     // var f = {
     //   "_id": "584cd68821add78d386802f0",
     //   "fields": {
@@ -38,65 +38,22 @@ angular.module('starter.controllers')
     // };
 
 
-    var movie;
-    Movies.getMovieById($stateParams.movieId)
-      .then(function (response) {
-        movie = response.data;
-        $scope.currentMovie = {
-          directors: _.get(movie, 'fields.directors'),
-          genres: _.get(movie, 'fields.genres'),
-          image_url: _.get(movie, 'fields.image_url'),
-          running_time_mins: (_.get(movie, 'fields.running_time_secs') / 60) || 120,
-          actors: _.get(movie, 'fields.actors'),
-          release_date: moment(_.get(movie, 'fields.release_date')).format('LL'),
-          plot: _.get(movie, 'fields.plot'),
-          title: _.get(movie, 'fields.title')
-        };
-      });
-
-    $scope.updateMovie = function () {
+    $scope.addMovie = function () {
       var cm = $scope.currentMovie;
 
+      var movie = {};
       _.set(movie, 'fields.directors', _.split(cm.directors, ','));
       _.set(movie, 'fields.genres', _.split(cm.genres, ','));
       _.set(movie, 'fields.actors', _.split(cm.actors, ','));
-      _.set(movie, 'fields.running_time_secs', cm.running_time_mins * 60);
+      _.set(movie, 'fields.running_time_secs', _.toNumber(cm.running_time_mins) * 60);
       _.set(movie, 'fields.plot', cm.plot);
       _.set(movie, 'fields.title', cm.title);
       _.set(movie, 'fields.release_date', moment(cm.release_date, 'LL').format());
+      _.set(movie, 'fields.rank', _.toNumber(cm.rank));
 
       console.log(movie);
 
     };
 
 
-  })
-  .directive('fdInput', function () {
-    return {
-      scope: {
-        fileName: '='
-      },
-      link: function (scope, element, attrs) {
-        element.on('change', function (evt) {
-          var files = evt.target.files;
-          console.log(files[0].name);
-          console.log(files[0].size);
-
-          scope.fileName = files[0].name;
-
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-            // scope.fileSrc = e.target.result;
-            // scope.$apply();
-            $('#fileImg').attr('src', e.target.result);
-            //scope.currentMovie.image_url = e.target.result;
-          };
-
-          reader.readAsDataURL(files[0]);
-
-        });
-      }
-    }
   });
-

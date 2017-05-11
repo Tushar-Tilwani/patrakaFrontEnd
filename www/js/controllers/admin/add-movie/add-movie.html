@@ -7,8 +7,8 @@
 
   <ion-content padding="true">
 
-    <button ng-click="updateMovie()" class="button margin-bottom-large icon-left ion-edit button-energized">
-      Update
+    <button ng-click="addMovie()" class="button margin-bottom-large icon-left ion-edit button-balanced">
+      Add
     </button>
 
     <div class="list">
@@ -25,6 +25,11 @@
       <label class="item item-input" ng-click="releaseDatePicker()">
         <span class="input-label">Release Date</span>
         <input type="text" ng-model="currentMovie.release_date">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Rank</span>
+        <input type="text" ng-model="currentMovie.rank">
       </label>
 
 
@@ -65,7 +70,7 @@
 
 
       <div class="item item-image">
-        <img  ng-src="{{currentMovie.image_url}}" id="fileImg" class="fit"/>
+        <img  data-ng-src="{{currentMovie.image_url}}" id="fileImg" class="fit"/>
       </div>
 
     </div>
