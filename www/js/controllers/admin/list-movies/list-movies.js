@@ -1,6 +1,11 @@
 angular.module('starter.controllers')
-  .controller('ListMoviesCtrl', function ($scope, $location, DTOptionsBuilder, DTColumnBuilder, Movies, _) {
+  .controller('ListMoviesCtrl', function ($scope, $location, $window, DTOptionsBuilder, DTColumnBuilder, Movies, _) {
 
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = false;
+    });
+
+    $scope.dtInstance = {};
     $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
       return Movies.getAllMovies()
         .then(function (response) {

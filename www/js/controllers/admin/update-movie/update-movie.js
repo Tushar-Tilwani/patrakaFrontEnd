@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('UpdateMovieCtrl', function ($scope, Movies, $stateParams, ionicDatePicker, _, moment) {
+  .controller('UpdateMovieCtrl', function ($scope, Movies, $location, $timeout, $window, $stateParams, ionicDatePicker, _, moment, $ionicPopup) {
 
     var releaseDateObj = {
       callback: function (val) {  //Mandatory
@@ -17,6 +17,13 @@ angular.module('starter.controllers')
       ionicDatePicker.openDatePicker(releaseDateObj);
     };
 
+    function goToListMovies() {
+      $location.path('admin/listMovies');
+
+      $timeout(function () {
+        $window.location.reload();
+      }, 200);
+    }
 
     // var f = {
     //   "_id": "584cd68821add78d386802f0",
@@ -67,8 +74,43 @@ angular.module('starter.controllers')
 
       console.log(movie);
 
+      Movies.updateMovie(movie._id, movie)
+        .then(function (response) {
+          goToListMovies();
+        });
     };
 
+
+    $scope.deleteMovie = function () {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Delete Movie!',
+        template: 'Are you sure?'
+      });
+
+      confirmPopup.then(function (res) {
+        if (res) {
+          Movies.deleteMovie(movie._id)
+            .then(function (response) {
+              $ionicPopup.alert({
+                title: 'Deleted!',
+                template: ''
+              }).then(function () {
+                goToListMovies();
+              });
+            }, function (error) {
+              //console.log(error.data.message);
+              $ionicPopup.alert({
+                title: 'Error!',
+                template: error.data.message
+              });
+            });
+        } else {
+          console.log('Not sure!');
+        }
+      });
+
+
+    };
 
   })
   .directive('fdInput', function () {

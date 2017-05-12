@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('AddMovieCtrl', function ($scope, Movies, $stateParams, ionicDatePicker, _, moment) {
+  .controller('AddMovieCtrl', function ($scope, Movies, $location, $timeout, $window, $stateParams, ionicDatePicker, _, moment) {
 
     var releaseDateObj = {
       callback: function (val) {  //Mandatory
@@ -51,8 +51,17 @@ angular.module('starter.controllers')
       _.set(movie, 'fields.release_date', moment(cm.release_date, 'LL').format());
       _.set(movie, 'fields.rank', _.toNumber(cm.rank));
 
-      console.log(movie);
+      //console.log(movie);
 
+      Movies.postMovie(movie)
+        .then(function (response) {
+          //console.log(response.data);
+          $location.path('admin/listMovies');
+
+          $timeout(function () {
+            $window.location.reload();
+          }, 100);
+        });
     };
 
 

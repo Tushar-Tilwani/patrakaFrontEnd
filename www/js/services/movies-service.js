@@ -3,6 +3,15 @@ angular.module('starter.services')
     "use strict";
     var currentMovie = null;
     return {
+      postMovie: function (data) {
+        return $http.post(PROPERTIES.DOMAIN + 'movies', data);
+      },
+      updateMovie: function (movieId, data) {
+        return $http.put(PROPERTIES.DOMAIN + 'movies/' + movieId, data);
+      },
+      deleteMovie: function (movieId) {
+        return $http.delete(PROPERTIES.DOMAIN + 'deleteMovie/' + movieId);
+      },
       postMovieForVendor: function (data) {
         return $http.post(PROPERTIES.DOMAIN + 'shows', data);
       },
