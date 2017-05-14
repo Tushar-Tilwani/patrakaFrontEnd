@@ -7,9 +7,21 @@
 
   <ion-content padding="true">
 
-    <button ng-click="addMovie()" class="button margin-bottom-large icon-left ion-edit button-balanced">
-      Add
-    </button>
+    <div ng-if="!isUpdate">
+      <button ng-click="addMovie()" class="button margin-bottom-large icon-left ion-edit button-balanced">
+        Add
+      </button>
+    </div>
+
+    <div ng-if="isUpdate">
+      <button ng-click="updateMovie()" class="button margin-bottom-large icon-left ion-edit button-energized">
+        Update
+      </button>
+
+      <button ng-click="deleteMovie()" class="button margin-bottom-large icon-left ion-minus-circled button-assertive">
+        Delete
+      </button>
+    </div>
 
     <div class="list">
       <label class="item item-input">
@@ -64,13 +76,24 @@
         <h2>{{currentMovie.title}}</h2>
       </div>
 
-      <div class="item">
-        <input ng-model="uploadDownloads" type="file" fd-input file-name="fileName"/>
+      <!--<div class="item">-->
+      <!--<input ng-model="uploadDownloads" type="file" fd-input file-name="fileName"/>-->
+      <!--</div>-->
+
+
+      <!--<div class="item item-image">-->
+      <!--<img  data-ng-src="{{currentMovie.image_url}}" id="fileImg" class="fit"/>-->
+      <!--</div>-->
+
+      <div ng-if="!isUpdate" class="item">
+        <file-input file-options="fileOptions"></file-input>
       </div>
 
 
       <div class="item item-image">
-        <img  data-ng-src="{{currentMovie.image_url}}" id="fileImg" class="fit"/>
+        <!--<img  data-ng-src="{{currentMovie.image_url}}" id="fileImg" class="fit"/>-->
+        <span ng-if="error" ng-bind="result.error" style="color:red;font-weight:bold"></span>
+        <img class="fit" ng-if="currentMovie.image_url" ng-src="{{currentMovie.image_url}}">
       </div>
 
     </div>

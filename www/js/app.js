@@ -9,7 +9,7 @@ angular.module('starter.controllers', []);
 angular.module('starter.services', []);
 angular.module('starter.globals', []);
 
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.globals', 'ionic-datepicker', 'ionic-timepicker', 'btford.socket-io', 'datatables'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.globals', 'starter.controllers', 'ionic-datepicker', 'ionic-timepicker', 'btford.socket-io', 'datatables'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -213,12 +213,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         }
       })
 
+      // .state('admin.updateMovie', {
+      //   url: '/updateMovie/:movieId',
+      //   views: {
+      //     'tab-list-movies': {
+      //       templateUrl: 'js/controllers/admin/update-movie/update-movie.html',
+      //       controller: 'UpdateMovieCtrl'
+      //     }
+      //   }
+      // })
+
       .state('admin.updateMovie', {
         url: '/updateMovie/:movieId',
         views: {
           'tab-list-movies': {
-            templateUrl: 'js/controllers/admin/update-movie/update-movie.html',
-            controller: 'UpdateMovieCtrl'
+            templateUrl: 'js/controllers/admin/add-movie/add-movie.html',
+            controller: 'AddMovieCtrl'
           }
         }
       })
@@ -234,7 +244,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       });
 
     // if none of the above states are matched, use this as the fallback
-    //$urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/login');
 
   })
   .config(function (ionicDatePickerProvider) {
