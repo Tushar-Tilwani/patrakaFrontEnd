@@ -8,7 +8,14 @@ angular.module('starter.controllers')
     };
 
     var gotoHomePage = function () {
-      $rootScope.user.type === 'vendor' ? $location.path('/vendor/checkTickets') : $location.path('/user/home');
+      if ($rootScope.user.type === 'vendor') {
+        $location.path('/vendor/checkTickets')
+      } else if ($rootScope.user.type === 'admin') {
+        $location.path('/admin/listMovies');
+      } else {
+        $location.path('/user/home');
+      }
+
     };
 
     var setUser = function () {
@@ -17,7 +24,7 @@ angular.module('starter.controllers')
       }
     };
 
-    $scope.$on("$ionicView.enter", function () {
+    $scope.$on("$ionicView.beforeEnter", function () {
       setUser();
     });
 

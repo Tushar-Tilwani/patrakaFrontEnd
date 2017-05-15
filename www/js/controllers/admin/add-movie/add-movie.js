@@ -37,7 +37,7 @@ angular.module('starter.controllers')
     };
 
     $scope.releaseDatePicker = function () {
-      ionicDatePickr.openDatePicker(releaseDateObj);
+      ionicDatePicker.openDatePicker(releaseDateObj);
     };
 
     function goToListMovies() {
@@ -129,7 +129,7 @@ angular.module('starter.controllers')
     };
 
     $scope.deleteMovie = function () {
-      var confirmPopup = $ionicPopup.confirm({
+      let confirmPopup = $ionicPopup.confirm({
         title: 'Delete Movie!',
         template: 'Are you sure?'
       });

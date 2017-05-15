@@ -241,6 +241,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
             controller: 'AddMovieCtrl'
           }
         }
+      })
+      .state('admin.aboutUs', {
+        url: '/aboutUs',
+        views: {
+          'tab-about-us': {
+            templateUrl: 'js/controllers/common/about-us/about-us.html',
+            controller: 'AboutUsCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback
