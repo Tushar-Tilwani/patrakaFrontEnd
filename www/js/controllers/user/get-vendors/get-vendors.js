@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('GetVendorsCtrl', function ($scope, $rootScope, _, Movies, $stateParams, $interpolate, $cordovaInAppBrowser) {
+  .controller('GetVendorsCtrl', function ($scope, $rootScope, _, Movies, Vendors, $stateParams, $interpolate, $cordovaInAppBrowser) {
     'use strict';
 
     $scope.movieId = $stateParams.movieId;
@@ -20,7 +20,7 @@ angular.module('starter.controllers')
     };
 
     function _init() {
-      Movies.getVendorsByMovieId($stateParams.movieId)
+      Vendors.getVendorsByMovieCorrected($stateParams.movieId, $rootScope.user._id)
         .then(function (response) {
           $scope.vendors = response.data;
         });

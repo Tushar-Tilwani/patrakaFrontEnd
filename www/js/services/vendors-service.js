@@ -31,13 +31,9 @@ angular.module('starter.services')
             return _.get(response, 'data.blacklistUsers');
           })
       },
-      get: function (_id) {
-        for (var i = 0; i < VENDORS.length; i++) {
-          if (VENDORS[i]._id == _id) {
-            return VENDORS[i];
-          }
-        }
-        return null;
+      getVendorsByMovieCorrected: function (movieId, userId) {
+        ///movies/:movieId/user/:userId/vendors
+        return $http.get(PROPERTIES.DOMAIN + 'movies/' + movieId + '/user/' + userId + '/vendors');
       }
     };
   }]);
