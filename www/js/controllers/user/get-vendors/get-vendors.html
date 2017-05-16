@@ -10,7 +10,7 @@
   </ion-header-bar>
   <ion-content>
     <div class="list">
-      <div ng-repeat="vendor in vendors | filter: { companyName: vendorNamePattern}"
+      <div ng-repeat="vendor in vendors | filter: { companyName: vendorNamePattern} | orderBy: distanceSort"
            class="item item-thumbnail-left item-icon-right">
         <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
         <h2>{{vendor.companyName}}</h2>

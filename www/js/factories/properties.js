@@ -4,7 +4,7 @@ angular.module('starter.globals')
     'PORT': '3000',
     'DOMAIN': 'http://localhost:3000/api/'
   })
-  .factory('TokenHttpInterceptor', function ($q, _) {
+  .factory('TokenHttpInterceptor', function ($q, _, $location) {
     return {
       request: function (config) {
         let user = JSON.parse(localStorage.getItem('user'));
@@ -22,6 +22,7 @@ angular.module('starter.globals')
         const message = _.get(rejection, 'data.message');
         if (!_.isEmpty(message)) {
           alert(rejection.data.message);
+          $location.path('/login');
         }
         return $q.reject(rejection);
       }

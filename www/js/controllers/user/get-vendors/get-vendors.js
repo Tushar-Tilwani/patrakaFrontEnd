@@ -1,8 +1,15 @@
 angular.module('starter.controllers')
-  .controller('GetVendorsCtrl', function ($scope, _, Movies, $stateParams, $interpolate, $cordovaInAppBrowser) {
+  .controller('GetVendorsCtrl', function ($scope, $rootScope, _, Movies, $stateParams, $interpolate, $cordovaInAppBrowser) {
     'use strict';
 
     $scope.movieId = $stateParams.movieId;
+
+    console.log($rootScope.myLoc);
+
+    $scope.distanceSort = function (vendor) {
+      return _.getDistance(vendor.location, $rootScope.myLoc);
+    };
+
 
     var url = $interpolate('https://www.google.com/maps?saddr=My+Location&daddr={{location.lat}},{{location.lng}}');
 
