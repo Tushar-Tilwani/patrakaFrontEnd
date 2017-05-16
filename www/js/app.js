@@ -288,7 +288,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
       $location.path('/login');
     };
 
-    var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    let posOptions = {timeout: 10000, enableHighAccuracy: true};
     $ionicPlatform.ready(function () {
       var _init = function () {
         $cordovaGeolocation
@@ -300,17 +300,9 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
             };
           }, function (err) {
             $rootScope.err = err;
-          })
-          .finally(function () {
           });
       };
       _init();
     });
 
-    // $rootScope.vendorId = '5853a2983dc77b661dbf364f';
-    // $rootScope.user = {
-    //   // //type: 'business',
-    //   // type: 'user',
-    //   "_id": "584de17321add78d386816dc"
-    // }
   });

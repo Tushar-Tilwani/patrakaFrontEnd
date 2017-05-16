@@ -20,11 +20,11 @@
   </ion-content>
 
   <ion-content padding="true">
-    <div class="list list-inset">
-      <label class="item item-input">
+    <div class="list list-inset"  ng-if="blacklistUsers.length">
+      <div class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="Search" ng-model="searchUser">
-      </label>
+      </div>
     </div>
 
     <ion-list show-delete="shouldShowDelete"

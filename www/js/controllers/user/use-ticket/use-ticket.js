@@ -19,9 +19,16 @@ angular.module('starter.controllers')
           }, function (err) {
             $scope.err = err;
             // error
-          }).finally(function () {
-        });
+          });
       });
+
+
+      Tickets.get($stateParams.ticketId)
+        .then(function (response) {
+          $scope.ticket = response.data;
+          $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
+        });
+
     });
 
 
@@ -33,11 +40,6 @@ angular.module('starter.controllers')
     $scope.ticket = Tickets.getCurrentTicket();
     var mySocket;
 
-    Tickets.get($stateParams.ticketId)
-      .then(function (response) {
-        $scope.ticket = response.data;
-        $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
-      });
 
     function getPopUpData(data) {
       return {
