@@ -213,16 +213,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
         }
       })
 
-      // .state('admin.updateMovie', {
-      //   url: '/updateMovie/:movieId',
-      //   views: {
-      //     'tab-list-movies': {
-      //       templateUrl: 'js/controllers/admin/update-movie/update-movie.html',
-      //       controller: 'UpdateMovieCtrl'
-      //     }
-      //   }
-      // })
-
       .state('admin.updateMovie', {
         url: '/updateMovie/:movieId',
         views: {
@@ -242,6 +232,17 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
           }
         }
       })
+
+      .state('admin.blacklistUsers', {
+        url: '/blacklistUsers',
+        views: {
+          'tab-blacklist-users': {
+            templateUrl: 'js/controllers/admin/blacklist-users/blacklist-users.html',
+            controller: 'AdminBlacklistUsersCtrl'
+          }
+        }
+      })
+
       .state('admin.aboutUs', {
         url: '/aboutUs',
         views: {

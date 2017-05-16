@@ -20,6 +20,12 @@ angular.module('starter.services')
       },
       removeBlacklistUser: function (vendorId, userId) {
         return $http.delete(PROPERTIES.DOMAIN + 'vendors/' + vendorId + '/removeBlacklist/' + userId);
+      },
+      modifyGlobalBlacklistUsers: function (userId, isBlacklisted) {
+        return $http.put(PROPERTIES.DOMAIN + 'modifyGlobalBlacklistUsers/' + userId + '/' + isBlacklisted);
+      },
+      getGloballyBlacklistedUsers: function () {
+        return $http.get(PROPERTIES.DOMAIN + 'getGloballyBlacklistedUsers');
       }
     };
   }]);

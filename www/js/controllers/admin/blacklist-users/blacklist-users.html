@@ -1,0 +1,52 @@
+<ion-view view-title="Globally Blacklisted Users">
+
+  <ion-header-bar class="bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios7-search placeholder-icon"></i>
+      <input type="search" placeholder="Blacklist Users"
+             ng-change="searchUsersByPattern(addUserTypeAhead.searchStr)"
+             ng-model="addUserTypeAhead.searchStr">
+    </label>
+    <button ng-click="add()" class="button button-dark">
+      Add
+    </button>
+  </ion-header-bar>
+
+  <ion-content ng-show="addUserTypeAhead.results.length > 0" class="search-results" scroll="false">
+    <div class="list ">
+      <a ng-repeat="s in addUserTypeAhead.results" ng-click="searchItemClick(s)" class="item">{{s.first_name}}
+        {{s.last_name}}</a>
+    </div>
+  </ion-content>
+
+  <ion-content padding="true">
+    <!--<div class="list list-inset"  ng-if="blacklistUsers.length">-->
+      <!--<div class="item item-input">-->
+        <!--<i class="icon ion-search placeholder-icon"></i>-->
+        <!--<input type="text" placeholder="Search" ng-model="searchUser">-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <ion-list show-delete="shouldShowDelete"
+              show-reorder="shouldShowReorder"
+              can-swipe="listCanSwipe">
+      <ion-item ng-repeat="user in blacklistUsers | filter:searchUser"
+                class="item-thumbnail-left">
+
+        <img ng-src="{{user.avatar}}">
+        <h2>{{user.last_name}}, {{user.first_name}}</h2>
+        <p>{{user.user_name}}</p>
+        <ion-option-button class="button-positive"
+                           ng-click="share(item)">
+          Share
+        </ion-option-button>
+        <ion-delete-button class="ion-minus-circled"
+                           ng-click="remove(user)">
+        </ion-delete-button>
+        <ion-reorder-button class="ion-navicon"
+                            on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+        </ion-reorder-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
