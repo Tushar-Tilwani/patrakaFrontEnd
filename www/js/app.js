@@ -288,7 +288,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
       $location.path('/login');
     };
 
-    let posOptions = {timeout: 10000, enableHighAccuracy: true};
+    let posOptions = {timeout: 8000, enableHighAccuracy: false};
     $ionicPlatform.ready(function () {
       var _init = function () {
         $cordovaGeolocation

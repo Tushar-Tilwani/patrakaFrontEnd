@@ -9,7 +9,11 @@ angular.module('starter.controllers')
     $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
       return Movies.getAllMovies()
         .then(function (response) {
-          return _.map(response.data, function (movie) {
+          let values = _.filter(response.data, function (v) {
+            return !_.isEmpty(v.fields)
+          });
+
+          return _.map(values, function (movie) {
             return {
               _id: movie._id,
               title: movie.fields.title,

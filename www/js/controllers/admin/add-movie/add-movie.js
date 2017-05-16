@@ -4,7 +4,7 @@ angular.module('starter.controllers')
     $scope.currentMovie = {};
     $scope.isUpdate = !!$stateParams.movieId;
 
-    let movie;
+    let movie = {};
 
     if ($scope.isUpdate) {
       Movies.getMovieById($stateParams.movieId)
@@ -48,7 +48,7 @@ angular.module('starter.controllers')
       }, 200);
     }
 
-    function setMovieObj() {
+    function getMovieObj() {
       let cm = $scope.currentMovie;
       _.set(movie, 'fields.directors', _.split(cm.directors, ','));
       _.set(movie, 'fields.genres', _.split(cm.genres, ','));
@@ -93,7 +93,7 @@ angular.module('starter.controllers')
         template: 'Uploading...'
       });
 
-      movie = setMovieObj();
+      movie = getMovieObj();
 
       $scope.fileOptions.upload() //Function defined in file-directive.js
         .then(function (url) {
@@ -119,7 +119,7 @@ angular.module('starter.controllers')
         return;
       }
 
-      movie = setMovieObj();
+      movie = getMovieObj();
       console.log(movie);
 
       Movies.updateMovie(movie._id, movie)
