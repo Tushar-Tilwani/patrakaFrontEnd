@@ -7,6 +7,13 @@ angular.module('starter.controllers')
     $scope.previousTickets = [];
     $scope.pageData = {};
 
+    $rootScope.$watch('myLoc', function (value) {
+      if (!_.isEmpty(value)) {
+        $scope.myLoc = $rootScope.myLoc;
+      }
+    });
+
+
     $ionicPlatform.ready(function () {
       var _init = function () {
         $cordovaGeolocation
@@ -23,14 +30,23 @@ angular.module('starter.controllers')
       _init();
     });
 
-    function emitError(data) {
-      mySocket.emit('validatedTicketResult', _.defaults(data, {flag: false, message: 'Please contact Vendor.'}));
+    function emitError(data, message) {
+      mySocket.emit('validatedTicketResult', _.defaults(data, {
+        flag: false,
+        message: message || 'Please contact Vendor.'
+      }));
     }
 
     function showConfirm(data) {
       $scope.data = data;
       //Distance in meters
       $scope.data.distance = _.getDistance($scope.myLoc, $scope.data.location, 'K') * 1000;
+
+      if ($scope.data.distance > 1000) {
+        emitError($scope.data, 'You are too far from vendor.');
+        return;
+      }
+
       var confirmPopup = $ionicPopup.confirm({
         title: 'Confirm: ' + data.user.first_name + ' ' + data.user.last_name,
         templateUrl: 'js/controllers/vendor/check-tickets/popup.html',

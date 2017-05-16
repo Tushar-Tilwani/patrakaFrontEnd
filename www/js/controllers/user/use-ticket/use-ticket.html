@@ -5,10 +5,16 @@
     </ion-nav-back-button>
   </ion-nav-bar>
   <ion-content class="padding" scroll="false">
+    <br/>
+
     <div class="item">
-      Distance:
-      <span ng-if="vendorDistance">{{vendorDistance + 'Miles'}} </span>
-      <span ng-if="!vendorDistance">calculating....</span>
+      Distance
+    </div>
+
+    <div class="item">
+
+      <span ng-if="vendorDistance >= 0">{{vendorDistance}} Miles</span>
+      <span ng-if="vendorDistance < 0">calculating....</span>
     </div>
 
     <div class="list card">

@@ -1,5 +1,15 @@
 angular.module('starter.controllers')
   .controller('UseTicketCtrl', function ($scope, $rootScope, $stateParams, $ionicPlatform, Tickets, $ionicPopup, $cordovaGeolocation, $timeout, $state, $location, getMySocket, _, $ionicHistory, $ionicNavBarDelegate) {
+    $scope.vendorDistance = -1;
+
+    function setVendorDistance() {
+
+      let location = _.get($scope.ticket, 'vendor.location');
+
+      if (location) {
+        $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
+      }
+    }
 
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
@@ -14,8 +24,7 @@ angular.module('starter.controllers')
               lng: position.coords.longitude
             }, $rootScope.myLoc);
 
-            $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
-
+            setVendorDistance();
           }, function (err) {
             $scope.err = err;
             // error
@@ -26,7 +35,7 @@ angular.module('starter.controllers')
       Tickets.get($stateParams.ticketId)
         .then(function (response) {
           $scope.ticket = response.data;
-          $scope.vendorDistance = _.getDistance($scope.ticket.vendor.location, $rootScope.myLoc);
+          setVendorDistance();
         });
 
     });
@@ -66,7 +75,7 @@ angular.module('starter.controllers')
 
       $scope.useTicket = function () {
         $scope.isLoading = true;
-        var myLoc = {
+        let myLoc = {
           lat: $scope.myLoc.lat || $rootScope.myLoc.lat,
           lng: $scope.myLoc.lng || $rootScope.myLoc.lng
         };

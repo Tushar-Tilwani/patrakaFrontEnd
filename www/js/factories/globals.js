@@ -3,7 +3,7 @@ angular.module('starter.globals')
 
     function getDistance(loc1, loc2, unit, roundOff) {
       if (!loc1 || !loc2) {
-        return;
+        return -1;
       }
       roundOff = roundOff || 2;
       var lat1 = loc1.lat;
@@ -35,7 +35,7 @@ angular.module('starter.globals')
   }])
   .factory('getMySocket', function (socketFactory, PROPERTIES) {
     return function (id) {
-      var myIoSocket = io.connect(PROPERTIES.DOMAIN, {query: 'id=' + id});
+      var myIoSocket = io.connect(PROPERTIES.SOCKET_DOMAIN, {query: 'id=' + id});
       return socketFactory({
         ioSocket: myIoSocket
       });
