@@ -88,7 +88,7 @@ angular.module('starter.controllers')
       }
 
 
-      if (isImage($scope.userFileOptions.file)) {
+      if (!isImage($scope.userFileOptions.file)) {
         $ionicPopup.alert({
           title: 'Validation Failed',
           template: 'Upload picture for user'
