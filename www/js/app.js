@@ -41,6 +41,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.gl
         controller: 'LoginCtrl'
       })
 
+      .state('signUp', {
+        url: '/signUp',
+        templateUrl: 'js/controllers/common/sign-up/sign-up.html',
+        controller: 'SignUpCtrl'
+      })
+
       // setup an abstract state for the tabs directive
       .state('user', {
         url: '/user',

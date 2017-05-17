@@ -1,0 +1,76 @@
+<ion-view view-title="Login">
+  <ion-content scroll="true" padding="true" class="v-center">
+
+    <div>
+      <h1 class="hindi center">Patraka</h1>
+
+      <div class="list card">
+
+        <div class="item item-divider">
+          User Details
+        </div>
+
+        <label class="item item-input  ">
+          <span class="input-label">First Name</span>
+          <input ng-model="user.first_name" type="text" placeholder="First Name">
+        </label>
+
+        <label class="item item-input  ">
+          <span class="input-label">Last Name</span>
+          <input ng-model="user.last_name" type="text" placeholder="Last Name">
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Gender
+          </div>
+
+          <select ng-model="user.gender">
+            <option>Male</option>
+            <option selected>Female</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">User Name</span>
+          <input ng-model="user.user_name" type="text" placeholder="User Name">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input ng-model="user.password" type="password" placeholder="Password">
+        </label>
+
+
+        <label class="item item-input">
+          <span class="input-label">Confirm Password</span>
+          <input ng-model="extra.confirmPassword" type="password" placeholder="Confirm Password">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input ng-model="user.email" type="text" placeholder="Email">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Phone</span>
+          <input ng-model="user.phone" type="text" placeholder="Phone">
+        </label>
+
+
+        <div class="item">
+          <span class="input-label">Profile Image</span>
+          <file-input file-options="fileOptions"></file-input>
+        </div>
+      </div>
+
+      <button ng-click="createAccount()" class="button button-full button-balanced">
+        Create Account
+      </button>
+    </div>
+
+
+
+  </ion-content>
+</ion-view>

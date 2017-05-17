@@ -26,6 +26,12 @@ angular.module('starter.services')
       },
       getGloballyBlacklistedUsers: function () {
         return $http.get(PROPERTIES.DOMAIN + 'getGloballyBlacklistedUsers');
-      }
+      },
+      checkUserName: function (userName) {
+        return $http.get(PROPERTIES.SOCKET_DOMAIN + '/checkUserName/' + userName);
+      },
+      registerUser: function (userObj) {
+        return $http.post(PROPERTIES.SOCKET_DOMAIN + '/registerUser', userObj);
+      },
     };
   }]);

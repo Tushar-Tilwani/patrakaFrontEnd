@@ -42,8 +42,8 @@ angular.module('starter.controllers')
 
 
     $scope.backToUseTickets = function () {
-      $state.go('user.useTickets');
-      //$location.path()
+      //$state.go('user.useTickets');
+      $location.path('#/user/useTickets');
     };
 
     $scope.ticket = Tickets.getCurrentTicket();
@@ -67,7 +67,7 @@ angular.module('starter.controllers')
             if (data.flag) {
               $ionicHistory.clearHistory();
               $ionicHistory.clearCache();
-              $location.path('/useTickets');
+              $location.path('#/user/useTickets');
             }
             $scope.isLoading = false;
           });
