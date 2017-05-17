@@ -1,8 +1,77 @@
 <ion-view view-title="Login">
   <ion-content scroll="true" padding="true" class="v-center">
 
-    <div>
-      <h1 class="hindi center">Patraka</h1>
+
+    <h1 class="hindi center">Patraka</h1>
+
+    <button ng-if="page.previousMethods.length" ng-click="backBtn()"
+            class="button icon-left ion-chevron-left button-dark">
+      Back
+    </button>
+
+    <div ng-if="!page.method" class="list list-inset font_large">
+
+      <div class="item item-divider">
+        Choose your Sign Up method.
+      </div>
+
+      <div ng-click="page.isVendor=false;updatePage('user')" class="item item-icon-right">
+        Sign Up as a USER!
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+
+      <div ng-click="page.isVendor=true;updatePage('vendor')" class="item item-icon-right">
+        Sign Up as a VENDOR!
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+
+    <div ng-if="page.method=='vendor'">
+
+      <div class="list card">
+
+        <div class="item item-divider">
+          Vendor Details
+        </div>
+
+        <label class="item item-input  ">
+          <span class="input-label">Vendor Name</span>
+          <input ng-model="vendor.companyName" type="text" placeholder="The Little Theatre">
+        </label>
+
+        <label class="item item-input  ">
+          <span class="input-label">Latitude</span>
+          <input ng-model="vendor.location.lat" type="text" placeholder="43.1560560999">
+        </label>
+
+        <label class="item item-input  ">
+          <span class="input-label">Longitude</span>
+          <input ng-model="vendor.location.lng" type="text" placeholder="-77.5979717">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Address</span>
+          <input ng-model="vendor.vicinity" type="text" placeholder="240 East Avenue, Rochester">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Type</span>
+          <input ng-model="vendor.type" type="text" disabled placeholder="Movie Theater">
+        </label>
+
+        <div class="item item-input">
+          <span class="input-label">Vendor Image</span>
+          <file-input file-options="vendorFileOptions"></file-input>
+        </div>
+      </div>
+
+      <button ng-click="updatePage('user')"
+              class="button icon-right ion-chevron-right button-full button-balanced">
+        Next
+      </button>
+    </div>
+
+    <div ng-if="page.method=='user'">
 
       <div class="list card">
 
@@ -61,7 +130,7 @@
 
         <div class="item">
           <span class="input-label">Profile Image</span>
-          <file-input file-options="fileOptions"></file-input>
+          <file-input file-options="userFileOptions"></file-input>
         </div>
       </div>
 
@@ -69,8 +138,6 @@
         Create Account
       </button>
     </div>
-
-
 
   </ion-content>
 </ion-view>

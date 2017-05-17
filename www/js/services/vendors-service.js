@@ -32,8 +32,10 @@ angular.module('starter.services')
           })
       },
       getVendorsByMovieCorrected: function (movieId, userId) {
-        ///movies/:movieId/user/:userId/vendors
         return $http.get(PROPERTIES.DOMAIN + 'movies/' + movieId + '/user/' + userId + '/vendors');
+      },
+      registerVendor: function (vendorObj) {
+        return $http.post(PROPERTIES.SOCKET_DOMAIN + '/registerVendor', vendorObj);
       }
     };
   }]);

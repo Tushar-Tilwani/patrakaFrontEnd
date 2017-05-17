@@ -4,12 +4,15 @@ angular.module('starter.controllers')
 
     $scope.movieId = $stateParams.movieId;
 
-    console.log($rootScope.myLoc);
 
     $scope.distanceSort = function (vendor) {
       return _.getDistance(vendor.location, $rootScope.myLoc);
     };
 
+
+    $scope.isLink = function (url) {
+      return _.startsWith(url, 'http');
+    };
 
     var url = $interpolate('https://www.google.com/maps?saddr=My+Location&daddr={{location.lat}},{{location.lng}}');
 

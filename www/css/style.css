@@ -215,3 +215,7 @@ thead {
 .dataTables_wrapper {
   background-color: whitesmoke;
 }
+
+.font_large{
+  font-size: larger;
+}

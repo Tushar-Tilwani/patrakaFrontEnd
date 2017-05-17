@@ -1,13 +1,42 @@
 angular.module('starter.controllers')
-  .controller('SignUpCtrl', function ($scope, $ionicPopup, $location, Users, $ionicLoading, $rootScope) {
-    "use strict";
-    $scope.fileOptions = {};
+  .controller('SignUpCtrl', function ($scope, $ionicPopup, $location, Users, Vendors, $ionicLoading, _, $rootScope) {
+    'use strict';
+    $scope.userFileOptions = {file: {}};
+    $scope.vendorFileOptions = {file: {}};
 
     $scope.user = {
       gender: 'Female'
     };
 
     $scope.extra = {};
+    $scope.page = {
+      method: null,
+      previousMethods: []
+    };
+
+    $rootScope.$watch('myLoc', function () {
+      $scope.vendor.location = $rootScope.myLoc;
+    });
+
+
+    $scope.vendor = {
+      "companyName": "Cinema Theatre",
+      "location": $rootScope.myLoc,
+      "rating": 4.8,
+      "types": [
+        "movie_theater",
+        "point_of_interest",
+        "establishment"
+      ],
+      "type": "Movie Theater",
+      "vicinity": "957 South Clinton Avenue, Rochester",
+      "image": "aa443d8b3000f1b8b5c7997c03639b35c65ccdf5.jpg",
+      "blacklist": []
+    };
+
+    $scope.backBtn = function () {
+      $scope.page.method = $scope.page.previousMethods.pop();
+    };
 
     let gotoHomePage = function () {
       if ($rootScope.user.type === 'vendor') {
@@ -19,14 +48,10 @@ angular.module('starter.controllers')
       }
     };
 
-    function validations() {
-      let cm = $scope.user;
-
-      let keys = ["first_name", "last_name", "email", "gender", "user_name", "password", "phone"];
-
+    function keysValidations(obj, keys) {
       let isValid = true;
       _.forEach(keys, function (key) {
-        if (!_.get(cm, key)) {
+        if (!_.get(obj, key)) {
           $ionicPopup.alert({
             title: 'Validation Failed',
             template: 'Please input value for ' + key
@@ -39,7 +64,12 @@ angular.module('starter.controllers')
       return isValid;
     }
 
-    function moreValidations() {
+    function userValidations() {
+
+      let userKeys = ['first_name', 'last_name', 'email', 'gender', 'user_name', 'password', 'phone'];
+      if (!keysValidations($scope.user, userKeys)) {
+        return false;
+      }
 
       if (!validateEmail($scope.user.email)) {
         $ionicPopup.alert({
@@ -57,27 +87,25 @@ angular.module('starter.controllers')
         return false;
       }
 
+
+      if (isImage($scope.userFileOptions.file)) {
+        $ionicPopup.alert({
+          title: 'Validation Failed',
+          template: 'Upload picture for user'
+        });
+        return false;
+      }
+
       return true;
     }
 
     function validateEmail(email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
 
-    $scope.createAccount = function () {
-      if (!validations()) {
-        return;
-      }
-      if (!moreValidations()) {
-        return;
-      }
+    function userCalls() {
       let user = $scope.user;
-
-      $ionicLoading.show({
-        template: 'Uploading...'
-      });
-
       Users.checkUserName(user.user_name)
         .then(function (response) {
           if (!_.isEmpty(response.data)) {
@@ -89,47 +117,95 @@ angular.module('starter.controllers')
             return;
           }
 
-          $scope.fileOptions.upload() //Function defined in file-directive.js
+          $scope.userFileOptions.upload() //Function defined in file-directive.js
             .then(function (url) {
-              _.set(user, 'avatar', url);
-              Users.registerUser(user)
-                .then(function (response) {
-                  if (response.data) {
-                    $ionicLoading.hide();
-                    $rootScope.user = response.data;
-                    localStorage.setItem('user', JSON.stringify($rootScope.user));
-                    gotoHomePage();
-                  }
-                })
-                .catch(function () {
-                  $ionicLoading.hide();
-                });
+              return registerUser(user, url);
+            })
+            .catch(function () {
+              $ionicLoading.hide();
             });
         })
         .finally(function () {
           $ionicLoading.hide();
         });
 
+    }
+
+    function registerUser(user, url) {
+      _.set(user, 'avatar', url);
+      Users.registerUser(user)
+        .then(function (response) {
+          if (response.data) {
+            $ionicLoading.hide();
+            $rootScope.user = response.data;
+            localStorage.setItem('user', JSON.stringify($rootScope.user));
+            gotoHomePage();
+          }
+        })
+    }
+
+    $scope.createAccount = function () {
+      if (!userValidations()) {
+        return;
+      }
+
+      $ionicLoading.show({
+        template: 'Uploading...'
+      });
+      if ($scope.page.isVendor) {
+        vendorCalls()
+          .then(function (response) {
+            let vendor = response.data;
+            $scope.user.type = 'vendor';
+            $scope.user.vendorId = vendor._id;
+            return userCalls();
+          })
+      } else {
+        userCalls();
+      }
+
     };
+
+
+    function vendorValidations() {
+      let vendorKeys = ['companyName', 'location.lat', 'location.lng', 'type', 'vicinity'];
+      if (!keysValidations($scope.vendor, vendorKeys)) {
+        return keysValidations($scope.vendor, vendorKeys);
+      }
+
+      if (!isImage($scope.vendorFileOptions.file)) {
+        $ionicPopup.alert({
+          title: 'Validation Failed',
+          template: 'Upload picture for vendor'
+        });
+        return false;
+      }
+      return true;
+    }
+
+    function vendorCalls() {
+      let vendor = $scope.vendor;
+      return $scope.vendorFileOptions.upload() //Function defined in file-directive.js
+        .then(function (url) {
+          _.set(vendor, 'image', url);
+          return Vendors.registerVendor(vendor);
+        });
+    }
+
+    $scope.updatePage = function (page) {
+      //if going from vendor to user validate vendor values
+      if ($scope.page.isVendor && page === 'user') {
+        if (!vendorValidations()) {
+          return;
+        }
+      }
+      $scope.page.previousMethods.push($scope.page.method);
+      $scope.page.method = page;
+    };
+
+    function isImage(file) {
+      return file.size && _.startsWith(file.type, 'image');
+    }
 
   });
 
-
-// var f = {
-//   "_id": "584de17321add78d386816dc",
-//   "first_name": "Martha",
-//   "last_name": "Black",
-//   "email": "mblack1@patch.com",
-//   "gender": "Female",
-//   "ip_address": "195.110.142.53",
-//   "user_name": "mblack1",
-//   "password": {
-//     "salt": "dBeOvfenU1WJc863ucM1/2diy0ynBqBVzpkKAyd8qVtP5UlWRRij3QyYOZaMFrp0nudXmiOR9IynCepS2T4zVAdbQ1z/dnizMsO6cI8+ANCtnpsuZL+UJuykK/zQeyHfGu3V3PKzhY6U5vItw++uB8iQKYdcM1LXA+W4nKqmp9E=",
-//     "hash": "4iKM+qeNeNLUmElucR4geItaQP+f2DjvThUawghk3gcepIGd8RNcxeLghnYoPU4bL06CvqoG/ElPnBQQd3w0bjWx6SXjDNdrDXRQZb0MX7Tq5ZSqGcMLo8Dhe4WUZQFkNHZGYdxOeslHyBJ3iYgU2i/Qn2tdP/L/mANUhAN1meI="
-//   },
-//   "balance": 148.59,
-//   "avatar": "https://robohash.org/consequunturnemoin.png?size=200x200&set=set1",
-//   "phone": "+01-984-858-1836",
-//   "token": ("591b0052a7eaa918239b3bf4"),
-//   "updated_at": ("2017-05-16T15:27:08.323Z")
-// };

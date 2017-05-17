@@ -12,7 +12,10 @@
     <div class="list">
       <div ng-repeat="vendor in vendors | filter: { companyName: vendorNamePattern} | orderBy: distanceSort"
            class="item item-thumbnail-left item-icon-right">
-        <img ng-src="http://localhost:3000/static/images/{{vendor.image}}">
+
+        <img ng-if="!isLink(vendor.image)" ng-src="http://localhost:3000/static/images/{{vendor.image}}">
+        <img ng-if="isLink(vendor.image)" ng-src="{{vendor.image}}">
+
         <h2>{{vendor.companyName}}</h2>
         <p>Distance: {{ _.getDistance(vendor.location, myLoc)}} Miles</p>
 

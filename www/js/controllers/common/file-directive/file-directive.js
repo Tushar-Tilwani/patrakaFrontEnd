@@ -13,7 +13,7 @@ angular.module('starter.controllers')
           var file = files[0];
           if (file && typeof(file) !== undefined && file.size > 0) {
             scope.file = file;
-            // scope.$parent.fileOptions.file = file
+            scope.fileOptions.file = file;
           } else {
             scope.file = {};
             // scope.$parent.file = {};
@@ -24,11 +24,15 @@ angular.module('starter.controllers')
     }
   })
 
-  .controller('FileUploadController', function ($scope, $ionicLoading) {
+  .controller('FileUploadController', function ($scope, $q, _, $ionicLoading) {
     var imageUploader = new ImageUploader();
     $scope.result = {};
     $scope.file = {};
     $scope.fileOptions.upload = function () {
+      if (!$scope.file.size) {
+        alert('Please Upload a file');
+        return $q.reject();
+      }
       return imageUploader.push($scope.file)
         .then((data) => {
           console.debug('Upload complete. Data:', data);
