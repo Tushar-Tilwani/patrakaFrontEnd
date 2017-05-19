@@ -1,10 +1,13 @@
 angular.module('starter.globals')
-  .constant('PROPERTIES', {
-    'HOST': 'localhost',
-    'PORT': '3000',
-    'DOMAIN': 'http://localhost:3000/api/',
-    'SOCKET_DOMAIN': 'http://localhost:3000'
-  })
+  .constant('PROPERTIES', (function () {
+    const HOST = '34.193.93.49',
+      PORT = '3000';
+
+    return {
+      'DOMAIN': 'http://' + HOST + ':' + PORT + '/api/',
+      'SOCKET_DOMAIN': 'http://' + HOST + ':' + PORT
+    }
+  }()))
   .factory('TokenHttpInterceptor', function ($q, _, $location) {
     return {
       request: function (config) {
